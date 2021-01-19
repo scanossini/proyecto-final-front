@@ -1,12 +1,10 @@
-import React, {useState, Fragment} from 'react';
+import React from 'react';
 
-const NavBar = () => {
+export const NavBar = () => {
 
     return (
-        <Fragment>
+        <>
             <button>boton</button>
-        </Fragment>
+        </>
       );
 }
- 
-export default NavBar;
