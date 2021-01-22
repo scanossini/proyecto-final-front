@@ -17,6 +17,12 @@ export const SidebarData = [
         cName: 'nav-text'
     },
     {
+        title: 'Solicitudes',
+        path: '/solicitudes',
+        icon: <AiIcons.AiFillDatabase />,
+        cName: 'nav-text'
+    },
+    {
         title: 'Parámetros de donación',
         path: '/parametros',
         icon: <IoIcons.IoOptions />,

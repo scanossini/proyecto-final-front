@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Donantes() {
+export const Donantes = () => {
     return (
         <div className='donantes'>
             <h1>
@@ -9,5 +9,3 @@ function Donantes() {
         </div>
     )
 }
-
-export default Donantes
