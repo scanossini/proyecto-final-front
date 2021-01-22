@@ -31,17 +31,20 @@ export const Donantes = () => {
   }
   return (
     <div>
-        <Grid container spacing={2}>
-          <Grid item xs={9}>{pagination.currentData && pagination.currentData.map(((item, index) => (
-            <div key={item.id} className="post">
-            <h3>{`${item.title} - ${item.id}`}</h3>
-            <p>{item.body}</p>
-            </div>
-          )))} 
-          </Grid>
-          <Grid item xs={3}>
-            <Button variant="contained" color="primary">hola</Button>
-          </Grid>
+        <Grid container spacing={0}>
+          {pagination.currentData && pagination.currentData.map(((item, index) => (
+            <Grid container spacing={0}>
+              <Grid item xs={9}>
+                <div key={item.id} className="post">
+                  <h3>{`${item.title} - ${item.id}`}</h3>
+                  <p>{item.body}</p>
+                </div>
+              </Grid>
+              <Grid item xs={3} className="button" >
+                <Button variant="contained" color="primary">Editar</Button>
+              </Grid>
+            </Grid>
+        )))} 
           <Grid item xs={12}>
             <ReactPaginate
               previousLabel={'anterior'}
