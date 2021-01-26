@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import faker from 'faker'
 import axios from 'axios';
 import Grid from "@material-ui/core/Grid";
 import Button from '@material-ui/core/Button';
@@ -11,7 +10,7 @@ export const Donantes = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(10);
+  const [postsPerPage] = useState(10);
 
   useEffect(() => {
     const fetchPosts = async () => {

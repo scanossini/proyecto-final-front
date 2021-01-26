@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from '@material-ui/core/Button';
 
 export const Pagination = ({postsPerPage, totalPosts, paginate}) => {
   const pageNumbers = [];
@@ -11,10 +12,10 @@ export const Pagination = ({postsPerPage, totalPosts, paginate}) => {
     <nav>  
       <ul className="pagination">
         {pageNumbers.map(number => (
-          <li key={number} className="page-item">
-            <a onClick={() => paginate(number)} className="page-link">
+          <li key={number} style={{marginRight: '0.5%'}} className="btn btn-primary">
+            <Button  onClick={() => paginate(number)} >
               {number}
-            </a>
+            </Button>
           </li>
         ))}
       </ul>
