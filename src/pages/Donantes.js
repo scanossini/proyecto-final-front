@@ -31,14 +31,23 @@ export const Donantes = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div className="container mt-5">
-      <h1 className="text-primary mb-3"> Donantes </h1>
-      <Posts posts={currentPosts} loading={loading} />
-      <Pagination 
-        postsPerPage={postsPerPage}
-        totalPosts={posts.length}
-         paginate={paginate}/>
-    </div>
+    <Grid
+      container
+      spacing={0}
+      alignItems="center"
+      justify="center"
+    >
+      <Grid item className="text-primary mt-3" xs={12}><h1>Donantes</h1></Grid>
+      <Grid item xs={9}><Posts posts={currentPosts} loading={loading} /></Grid>
+      <Grid item xs={3}>asd</Grid>
+      <Grid item xs={12}>
+        <Pagination 
+          postsPerPage={postsPerPage}
+          totalPosts={posts.length}
+          paginate={paginate}
+        />
+      </Grid>
+    </Grid>
   );
 }
 
