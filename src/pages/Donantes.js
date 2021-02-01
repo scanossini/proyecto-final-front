@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import Grid from "@material-ui/core/Grid";
-import Button from '@material-ui/core/Button';
 import { Pagination } from '../components/Pagination/Pagination'
 import { Posts } from '../components/Posts/Posts'
 

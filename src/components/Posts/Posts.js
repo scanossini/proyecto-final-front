@@ -1,7 +1,6 @@
 import React from 'react'
 import Grid from "@material-ui/core/Grid";
 import Button from '@material-ui/core/Button';
-import './Posts.css'
 
 export const Posts = ({posts, loading}) => { 
 
@@ -10,7 +9,7 @@ export const Posts = ({posts, loading}) => {
   }
 
   return (
-     <ul className="list-group mb-4">
+     <ul className="list-group mb-4" style={{position: 'relative', zIndex: 1}}>
       {posts.map( post => (
         <Grid container spacing={0}>
           <Grid item xs={9}>
@@ -19,7 +18,7 @@ export const Posts = ({posts, loading}) => {
             </li>
           </Grid>
           <Grid item xs={3} >
-              <Button href={'/edit/' + post.id} className='botonEditar'>
+              <Button href={'/edit/' + post.id} color="primary" variant="contained">
                 Editar
               </Button>
           </Grid>
