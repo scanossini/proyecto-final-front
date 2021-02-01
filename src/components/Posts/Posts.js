@@ -25,7 +25,7 @@ export const Posts = ({posts, loading}) => {
           </Grid>
           <Grid item xs={3}>
             <div className={gutterStyles.parent}>
-              <Button classes={styles} variant={'contained'} color={'primary'}>
+              <Button href={'/edit/' + post.id} classes={styles} variant={'contained'} color={'primary'}>
                 Editar
               </Button>
             </div>
