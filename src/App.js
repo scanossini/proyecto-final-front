@@ -8,6 +8,7 @@ import Home from './pages/Home'
 import { Donantes } from './pages/Donantes'
 import Parametros from './pages/Parametros'
 import { Solicitudes } from './pages/Solicitudes';
+import  Edit  from './pages/Edit';
 
 const App = () => {
     return (
@@ -16,11 +17,12 @@ const App = () => {
                 <Navbar />
                 <Switch>
                     <Route path='/' exact component={Home} />
-                    <Route path='/login' component={LogIn}/>
+                    <Route path='/login' component={LogIn} />
                     <Route path='/donantes' component={Donantes} />
                     <Route path='/parametros' component={Parametros} />
                     <Route path='/solicitudes' component={Solicitudes} />
                     <Route path='/logout' component={LogOut} />
+                    <Route path='/edit' component={Edit} />
                 </Switch>
             </Router>
         </div> 

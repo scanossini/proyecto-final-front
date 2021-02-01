@@ -1,14 +1,9 @@
 import React from 'react'
 import Grid from "@material-ui/core/Grid";
 import Button from '@material-ui/core/Button';
-
-import { useFirebaseBtnStyles } from '@mui-treasury/styles/button/firebase';
-import { usePushingGutterStyles } from '@mui-treasury/styles/gutter/pushing';
-
+import './Posts.css'
 
 export const Posts = ({posts, loading}) => { 
-  const styles = useFirebaseBtnStyles();
-  const gutterStyles = usePushingGutterStyles();
 
   if(loading){
     return <h2>Loading...</h2>
@@ -23,12 +18,10 @@ export const Posts = ({posts, loading}) => {
               {post.title}           
             </li>
           </Grid>
-          <Grid item xs={3}>
-            <div className={gutterStyles.parent}>
-              <Button href={'/edit/' + post.id} classes={styles} variant={'contained'} color={'primary'}>
+          <Grid item xs={3} >
+              <Button href={'/edit/' + post.id} className='botonEditar'>
                 Editar
               </Button>
-            </div>
           </Grid>
         </Grid>
       ))}
