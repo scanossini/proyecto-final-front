@@ -18,7 +18,7 @@ function Navbar() {
                 <Link to="#" className="menu-bars">
                     <FaIcons.FaBars onClick={showSidebar} />
                 </Link>
-                <h1 className="title"> Banco de sangre</h1>
+                <h1 className="title pl-2 ml-auto">Banco de sangre</h1>
             </div>
             <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
                 <ul className='nav-menu-items' onClick={showSidebar}>
