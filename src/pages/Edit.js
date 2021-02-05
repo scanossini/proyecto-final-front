@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Edit() {
+export const Edit = () => {
     return (
         <h1 className='home'>
             Editar

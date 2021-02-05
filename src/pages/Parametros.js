@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Parametros() {
+export const Parametros = () => {
     return (
         <div className='home'>
             <h1>
@@ -9,5 +9,3 @@ function Parametros() {
         </div>
     )
 }
-
-export default Parametros

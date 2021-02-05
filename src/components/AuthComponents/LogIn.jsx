@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -7,6 +7,9 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+import swal from '@sweetalert/with-react';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -20,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%',
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -30,8 +33,31 @@ const useStyles = makeStyles((theme) => ({
 
 export const LogIn = () => {
   const classes = useStyles();
+  const history = useHistory();
   const [nick, setNick] = useState("");
   const [pwd, setPwd] = useState("");
+
+  useEffect(() => {
+      axios.get("http://localhost:5000/admin/isAuth", {"headers": {"token": sessionStorage.getItem("token")}})
+          .then(() => history.push("/"))
+          .catch(() => null)
+  }, [history])
+
+  const handleLogin = () => {
+      var data = {
+          nick: nick,
+          password: pwd
+      }
+
+      axios.post("http://localhost:5000/admin/signin", data)
+          .then(res => {
+              sessionStorage.setItem("token", res.data);
+              history.push("/");
+          })
+          .catch(
+              () => swal("Nickname o contraseña incorrectos", "", "error")
+          )
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -73,6 +99,7 @@ export const LogIn = () => {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={handleLogin}
           >
             Conectarse
           </Button>
