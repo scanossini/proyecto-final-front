@@ -11,13 +11,16 @@ const useStyles = makeStyles({
     },
     head: {
         backgroundColor: "lightblue",
-        color: "white",
     },
     button: {
         position: "fixed",
         right: "100px",
         bottom: "40px",
     },
+    container: {
+        maxHeight: 440,
+        marginTop: 70
+    }
 })
 
 export const Solicitudes = () => {
@@ -81,8 +84,8 @@ export const Solicitudes = () => {
     return (
         <Container>
             { solicitudes ? 
-                <TableContainer component={Paper}> 
-                    <Table className={classes.table}>
+                <TableContainer component={Paper} className={classes.container}> 
+                    <Table stickyHeader className={classes.table}>
                         <TableHead>
                             <TableRow className={classes.head}>
                                 <TableCell>Hospital</TableCell>
@@ -94,7 +97,7 @@ export const Solicitudes = () => {
                         <TableBody>
                             {
                                 solicitudes.map((solicitud) => (
-                                    <TableRow>
+                                    <TableRow hover>
                                         <TableCell>{solicitud.hospital}</TableCell>
                                         <TableCell>{solicitud.cantidad}</TableCell>
                                         <TableCell>{solicitud.tipoDeSangre}</TableCell>
