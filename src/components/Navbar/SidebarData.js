@@ -6,31 +6,31 @@ import * as IoIcons from "react-icons/io5";
 export const SidebarData = [
     {
         title: 'Inicio',
-        path: '/',
+        path: '/admin',
         icon: <AiIcons.AiFillHome />,
         cName: 'nav-text'
     },
     {
         title: 'Donantes',
-        path: '/donantes',
+        path: '/admin/donantes',
         icon: <BiIcons.BiDonateBlood />,
         cName: 'nav-text'
     },
     {
         title: 'Solicitudes',
-        path: '/solicitudes',
+        path: '/admin/solicitudes',
         icon: <AiIcons.AiFillDatabase />,
         cName: 'nav-text'
     },
     {
         title: 'Parámetros de donación',
-        path: '/parametros',
+        path: '/admin/parametros',
         icon: <IoIcons.IoOptions />,
         cName: 'nav-text'
     },
     {
         title: 'Cerrar Sesión',
-        path: '/logout',
+        path: '/admin/logout',
         icon: <AiIcons.AiOutlineLogout />,
         cName: 'nav-text'
     }

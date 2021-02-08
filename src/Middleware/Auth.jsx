@@ -13,7 +13,7 @@ export const Auth = (props) => {
             .then(() => setAuth(true))
             .catch(() => {
                 swal("Debes estar logueado para acceder a este recurso", "", "error")
-                    .then(() => history.push("/login"));
+                    .then(() => history.push("/"));
             })
     })
     

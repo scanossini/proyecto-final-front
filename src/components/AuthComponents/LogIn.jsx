@@ -39,7 +39,7 @@ export const LogIn = () => {
 
   useEffect(() => {
       axios.get("http://localhost:5000/admin/isAuth", {"headers": {"token": sessionStorage.getItem("token")}})
-          .then(() => history.push("/"))
+          .then(() => history.push("/admin"))
           .catch(() => null)
   }, [history])
 
@@ -52,7 +52,7 @@ export const LogIn = () => {
       axios.post("http://localhost:5000/admin/signin", data)
           .then(res => {
               sessionStorage.setItem("token", res.data);
-              history.push("/");
+              history.push("/admin");
           })
           .catch(
               () => swal("Nickname o contraseña incorrectos", "", "error")
