@@ -2,8 +2,7 @@ import { Container, Fab, makeStyles, Paper, Table, TableBody, TableCell, TableCo
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import AddIcon from "@material-ui/icons/Add";
-import { Row, Col } from "react-bootstrap";
-import swal from '@sweetalert/with-react';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles({
     table: {
@@ -25,6 +24,7 @@ const useStyles = makeStyles({
 
 export const Solicitudes = () => {
     const classes = useStyles();
+    const history = useHistory();
     const [solicitudes, setSolicitudes] = useState("");
 
     useEffect(() => {
@@ -38,47 +38,7 @@ export const Solicitudes = () => {
     }, [])
 
     const handleCreation = () => {
-        swal(
-            <div>
-                <Row>
-                    <Col xs={{ span: 6, offset: 1 }}>
-                        <TextField type="text" name="estado" id="estadoField" placeholder="Estado"/>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs={{ span: 6, offset: 1 }}>
-                        <TextField type="number" name="cantidad" id="cantidadField" placeholder="Cantidad"/>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs={{ span: 6, offset: 1 }}>
-                        <TextField type="text" name="hospital" id="hospitalField" placeholder="Hospital"/>
-                    </Col>
-                </Row>
-            </div>
-        , {
-            buttons: {
-                cancel: "Cancelar",
-                confirm: "Confirmar"
-            }
-        }).then(value => {
-            if (value !== null){
-                var data = {
-                    estado: document.getElementById("estadoField").value,
-                    cantidad: document.getElementById("cantidadField").value,
-                    hospital: document.getElementById("hospitalField").value,
-                    tipoDeSangre: 0,
-                    radio: 50,
-                    tiempoIncompleta: 10
-                }
-
-                axios.post('http://localhost:5000/solicitud', data)
-                    .then(res => {
-                        setSolicitudes(solicitudes.concat(res.data))
-                    })
-                    .catch(err => console.log(err))
-            }
-        })
+        history.push("/admin/solicitudes/crear")
     }
 
     return (
