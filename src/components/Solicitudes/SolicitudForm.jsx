@@ -20,7 +20,6 @@ export const SolicitudForm = () => {
     const classes = useStyles();
     const history = useHistory();
     const [hospital, setHospital] = useState("");
-    const [estado, setEstado] = useState("");
     const [cantidad, setCantidad] = useState("");
     const [tipo, setTipo] = useState("");
     const [hospitales, setHospitales] = useState("");
@@ -41,7 +40,7 @@ export const SolicitudForm = () => {
 
     const handleCreate = () => {
         var data = {
-            estado: estado,
+            estado: 'Abierta',
             cantidad: cantidad,
             hospital: hospital,
             tipoDeSangre: tipo,
@@ -77,22 +76,29 @@ export const SolicitudForm = () => {
                             </Select>
                     </FormControl>
                 </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField 
-                        required
-                        id="estado"
-                        name="estado"
-                        label="Estado"
-                        fullWidth
-                        onChange={(event) => setEstado(event.target.value)}
-                    />
-                </Grid>
+                {/*<Grid item xs={12} sm={6}>
+                     * pal edit
+                     <FormControl fullWidth>
+                        <InputLabel>Estado</InputLabel>
+                        <Select
+                            id="estado"
+                            name="estado"
+                            value={estado}
+                            onChange={(event) => setEstado(event.target.value)}
+                        >
+                            <MenuItem value={"Abierta"}>Abierta</MenuItem>
+                            <MenuItem value={"En proceso"}>En proceso</MenuItem>
+                            <MenuItem value={"Cerrada"}>Cerrada</MenuItem>
+                        </Select>
+                     </FormControl>
+                </Grid>*/}
                 <Grid item xs={12} sm={6}>
                     <TextField
                         required
                         id="cantidad"
                         name="cantidad"
                         label="Cantidad"
+                        inputProps={{ min: 1, max: 10 }}
                         type="number"
                         fullWidth
                         onChange={(event) => setCantidad(event.target.value)}
