@@ -3,6 +3,8 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import AddIcon from "@material-ui/icons/Add";
 import { useHistory } from 'react-router-dom';
+import IconButton from '@material-ui/core/IconButton';
+import EditIcon from '@material-ui/icons/Edit';
 
 const useStyles = makeStyles({
     table: {
@@ -19,6 +21,10 @@ const useStyles = makeStyles({
     container: {
         maxHeight: 440,
         marginTop: 70
+    },
+    editButton: {
+        backgroundColor: "rgb(255,255,102)",
+        fontSize: 15,
     }
 })
 
@@ -66,6 +72,7 @@ export const Solicitudes = () => {
                                 <TableCell>Donaciones</TableCell>
                                 <TableCell>Tipo</TableCell>
                                 <TableCell>Estado</TableCell>
+                                <TableCell>Operacion</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -76,6 +83,12 @@ export const Solicitudes = () => {
                                         <TableCell>{solicitud.cantidad}</TableCell>
                                         <TableCell>{solicitud.tipoDeSangre}</TableCell>
                                         <TableCell>{solicitud.estado}</TableCell>
+                                        <TableCell>
+                                            <IconButton className={classes.editButton}>
+                                                <EditIcon color="primary" />
+                                                Editar
+                                            </IconButton>
+                                        </TableCell>
                                     </TableRow>
                                 ))
                             }

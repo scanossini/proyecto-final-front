@@ -76,8 +76,8 @@ export const SolicitudForm = () => {
                             </Select>
                     </FormControl>
                 </Grid>
-                {/*<Grid item xs={12} sm={6}>
-                     * pal edit
+                {/* pal edit
+                <Grid item xs={12} sm={6}>
                      <FormControl fullWidth>
                         <InputLabel>Estado</InputLabel>
                         <Select
