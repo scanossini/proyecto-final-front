@@ -1,7 +1,7 @@
 import { Button, Container, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
@@ -23,6 +23,17 @@ export const SolicitudForm = () => {
     const [estado, setEstado] = useState("");
     const [cantidad, setCantidad] = useState("");
     const [tipo, setTipo] = useState("");
+    const [hospitales, setHospitales] = useState("");
+
+    useEffect(() => {
+        axios.get('http://localhost:5000/hospital/')
+            .then((response) => {
+                setHospitales(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+        })
+    }, [])
 
     const handleCancel = () => {
         history.push("/admin/solicitudes")
@@ -52,14 +63,19 @@ export const SolicitudForm = () => {
             </Typography>
             <Grid container spacing={3}>
                 <Grid item xs={12} sm={6}>
-                    <TextField 
-                        required
-                        id="hospital"
-                        name="hospital"
-                        label="Hospital"
-                        fullWidth
-                        onChange={(event) => setHospital(event.target.value)}
-                    />
+                    <FormControl fullWidth>
+                            <InputLabel>Hospital</InputLabel>
+                            <Select
+                                id="hospital"
+                                name="hospital"
+                                value={hospital}
+                                onChange={(event) => setHospital(event.target.value)}   
+                            >
+                                {hospitales ? hospitales.map((hospital) => (
+                                    <MenuItem value={hospital._id}>{hospital.nombre}</MenuItem>
+                                )) : null}
+                            </Select>
+                    </FormControl>
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <TextField 

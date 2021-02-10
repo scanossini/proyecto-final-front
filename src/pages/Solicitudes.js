@@ -1,4 +1,4 @@
-import { Container, Fab, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@material-ui/core';
+import { Container, Fab, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import AddIcon from "@material-ui/icons/Add";
@@ -26,11 +26,20 @@ export const Solicitudes = () => {
     const classes = useStyles();
     const history = useHistory();
     const [solicitudes, setSolicitudes] = useState("");
+    const [hospitales, setHospitales] = useState("");
 
     useEffect(() => {
         axios.get('http://localhost:5000/solicitud/')
             .then((response) => {
                 setSolicitudes(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+
+        axios.get('http://localhost:5000/hospital/')
+            .then((response) => {
+                setHospitales(response.data);
             })
             .catch((error) => {
                 console.log(error);
@@ -41,9 +50,14 @@ export const Solicitudes = () => {
         history.push("/admin/solicitudes/crear")
     }
 
+    const nombreHospital = (id) => {
+        const hospital = hospitales.filter(hospital => hospital._id === id)
+        return hospital[0].nombre
+    }
+    
     return (
         <Container>
-            { solicitudes ? 
+            { solicitudes && hospitales ? 
                 <TableContainer component={Paper} className={classes.container}> 
                     <Table stickyHeader className={classes.table}>
                         <TableHead>
@@ -58,7 +72,7 @@ export const Solicitudes = () => {
                             {
                                 solicitudes.map((solicitud) => (
                                     <TableRow hover>
-                                        <TableCell>{solicitud.hospital}</TableCell>
+                                        <TableCell>{nombreHospital(solicitud.hospital)}</TableCell>
                                         <TableCell>{solicitud.cantidad}</TableCell>
                                         <TableCell>{solicitud.tipoDeSangre}</TableCell>
                                         <TableCell>{solicitud.estado}</TableCell>
