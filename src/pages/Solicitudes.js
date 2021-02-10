@@ -5,6 +5,8 @@ import AddIcon from "@material-ui/icons/Add";
 import { useHistory } from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Tooltip from '@material-ui/core/tooltip';
 
 const useStyles = makeStyles({
     table: {
@@ -23,8 +25,16 @@ const useStyles = makeStyles({
         marginTop: 70
     },
     editButton: {
-        backgroundColor: "rgb(255,255,102)",
+        backgroundColor: "rgb(230,230,230)",
         fontSize: 15,
+    },
+    deleteButton: {
+        backgroundColor: "rgb(230,230,230)",
+        fontSize: 15,
+        marginLeft: 5,
+        '&:hover': {
+            textDecoration: 'underline',
+       }, 
     }
 })
 
@@ -56,6 +66,14 @@ export const Solicitudes = () => {
         history.push("/admin/solicitudes/crear")
     }
 
+    const handleEdit = (id) => {
+        console.log(id)
+    }
+
+    const handleDelete = (id) => {
+        console.log(id)
+    }
+
     const nombreHospital = (id) => {
         const hospital = hospitales.filter(hospital => hospital._id === id)
         return hospital[0].nombre
@@ -84,10 +102,22 @@ export const Solicitudes = () => {
                                         <TableCell>{solicitud.tipoDeSangre}</TableCell>
                                         <TableCell>{solicitud.estado}</TableCell>
                                         <TableCell>
-                                            <IconButton className={classes.editButton}>
-                                                <EditIcon color="primary" />
-                                                Editar
-                                            </IconButton>
+                                            <Tooltip title="Editar" aria-label="editar">
+                                                <IconButton 
+                                                    className={classes.editButton}
+                                                    onClick={handleEdit(solicitud.id)}
+                                                >
+                                                <EditIcon color="action" />
+                                                </IconButton>
+                                            </Tooltip>
+                                            <Tooltip title="Eliminar" aria-label="eliminar">
+                                                <IconButton 
+                                                    className={classes.deleteButton}
+                                                    onClick={handleDelete(solicitud.id)}
+                                                >
+                                                <DeleteIcon color="secondary" />
+                                                </IconButton>
+                                            </Tooltip>
                                         </TableCell>
                                     </TableRow>
                                 ))
