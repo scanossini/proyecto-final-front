@@ -117,7 +117,7 @@ export const Solicitudes = () => {
                                     aria-labelledby="alert-dialog-title"
                                     aria-describedby="alert-dialog-description"
                                     >
-                                        <DialogTitle id="alert-dialog-title">{"Eliminar solicitud?"}</DialogTitle>
+                                        <DialogTitle id="alert-dialog-title">{"¿Eliminar solicitud?"}</DialogTitle>
                                         <DialogActions>
                                             <Button onClick={() => handleClose(false, null)} color="primary">
                                             Cancelar
