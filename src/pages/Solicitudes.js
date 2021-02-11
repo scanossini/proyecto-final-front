@@ -92,7 +92,7 @@ export const Solicitudes = () => {
         <Container>
             { solicitudes && hospitales ? 
                 <TableContainer component={Paper} className={classes.container}> 
-                    <Table stickyHeader className={classes.table}>
+                    <Table className={classes.table}>
                         <TableHead>
                             <TableRow className={classes.head}>
                                 <TableCell>Hospital</TableCell>
