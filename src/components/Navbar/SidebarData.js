@@ -2,6 +2,7 @@ import React from 'react';
 import * as AiIcons from "react-icons/ai";
 import * as BiIcons from "react-icons/bi";
 import * as IoIcons from "react-icons/io5";
+import * as IoIcons2 from "react-icons/io";
 
 export const SidebarData = [
     {
@@ -26,6 +27,12 @@ export const SidebarData = [
         title: 'Parámetros de donación',
         path: '/admin/parametros',
         icon: <IoIcons.IoOptions />,
+        cName: 'nav-text'
+    },
+    {
+        title: 'Hospitales',
+        path: '/admin/hospitales',
+        icon: <IoIcons2.IoMdLocate />,
         cName: 'nav-text'
     },
     {
