@@ -31,10 +31,7 @@ const useStyles = makeStyles({
     deleteButton: {
         backgroundColor: "rgb(230,230,230)",
         fontSize: 15,
-        marginLeft: 5,
-        '&:hover': {
-            textDecoration: 'underline',
-       }, 
+        marginLeft: 5, 
     }
 })
 
@@ -67,11 +64,16 @@ export const Solicitudes = () => {
     }
 
     const handleEdit = (id) => {
-        console.log(id)
+        var url = "/admin/solicitudes/editar/" + id
+        history.push(url)
     }
 
-    const handleDelete = (id) => {
-        console.log(id)
+    const handleDelete = (solicitud) => {
+        axios.delete(`http://localhost:5000/solicitud/${solicitud._id}`)
+        .then(res => {
+            history.push("/admin/solicitudes")
+        })
+        .catch(err =>console.log(err))
     }
 
     const nombreHospital = (id) => {
@@ -90,7 +92,7 @@ export const Solicitudes = () => {
                                 <TableCell>Donaciones</TableCell>
                                 <TableCell>Tipo</TableCell>
                                 <TableCell>Estado</TableCell>
-                                <TableCell>Operacion</TableCell>
+                                <TableCell>Operación</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -105,7 +107,7 @@ export const Solicitudes = () => {
                                             <Tooltip title="Editar" aria-label="editar">
                                                 <IconButton 
                                                     className={classes.editButton}
-                                                    onClick={handleEdit(solicitud.id)}
+                                                    onClick={() => handleEdit(solicitud._id)}
                                                 >
                                                 <EditIcon color="action" />
                                                 </IconButton>
@@ -113,7 +115,7 @@ export const Solicitudes = () => {
                                             <Tooltip title="Eliminar" aria-label="eliminar">
                                                 <IconButton 
                                                     className={classes.deleteButton}
-                                                    onClick={handleDelete(solicitud.id)}
+                                                    onClick={() => handleDelete(solicitud)}
                                                 >
                                                 <DeleteIcon color="secondary" />
                                                 </IconButton>
