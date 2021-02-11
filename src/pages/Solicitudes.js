@@ -71,6 +71,13 @@ export const Solicitudes = () => {
     const handleDelete = (solicitud) => {
         axios.delete(`http://localhost:5000/solicitud/${solicitud._id}`)
         .then(res => {
+            axios.get('http://localhost:5000/solicitud/')
+            .then((response) => {
+                setSolicitudes(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
             history.push("/admin/solicitudes")
         })
         .catch(err =>console.log(err))
