@@ -52,10 +52,10 @@ export const Hospitales = () => {
     return(
         <Container>
             { hospitales ? 
-                <TableContainer component={Paper}> 
-                    <Table>
+                <TableContainer className={classes.container} component={Paper}> 
+                    <Table stickyHeader className={classes.table}>
                         <TableHead>
-                            <TableRow>
+                            <TableRow className={classes.head}>
                                 <TableCell>Hospital</TableCell>
                                 <TableCell>Operación</TableCell>
                             </TableRow>
@@ -87,7 +87,7 @@ export const Hospitales = () => {
                     </Table>
                 </TableContainer> : null
             }
-            <Fab onClick={()=>history.push("/admin/hospitales/crear")} color="primary" aria-label="add">
+            <Fab className={classes.button} onClick={()=>history.push("/admin/hospitales/crear")} color="primary" aria-label="add">
                 <AddIcon />
             </Fab>
        </Container>
