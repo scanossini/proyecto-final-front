@@ -21,7 +21,7 @@ function AuthRoutes(){
                     <Route exact path='/admin/parametros' component={Parametros} />
                     <Route exact path='/admin/solicitudes' component={Solicitudes} />
                     <Route exact path='/admin/solicitudes/crear' component={SolicitudForm}/>
-                    <Route exact path='/admin/solicitudes/editar/' component={Editar}/>
+                    <Route exact path='/admin/solicitudes/editar/:id' component={Editar}/>
                     <Route exact path='/admin/hospitales/' component={Hospitales}/>
                     <Route exact path='/admin/hospitales/crear' component={HospitalesForm}/>
             </Switch>
