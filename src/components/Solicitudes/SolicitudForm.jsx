@@ -76,22 +76,6 @@ export const SolicitudForm = () => {
                             </Select>
                     </FormControl>
                 </Grid>
-                {/* pal edit
-                <Grid item xs={12} sm={6}>
-                     <FormControl fullWidth>
-                        <InputLabel>Estado</InputLabel>
-                        <Select
-                            id="estado"
-                            name="estado"
-                            value={estado}
-                            onChange={(event) => setEstado(event.target.value)}
-                        >
-                            <MenuItem value={"Abierta"}>Abierta</MenuItem>
-                            <MenuItem value={"En proceso"}>En proceso</MenuItem>
-                            <MenuItem value={"Cerrada"}>Cerrada</MenuItem>
-                        </Select>
-                     </FormControl>
-                </Grid>*/}
                 <Grid item xs={12} sm={6}>
                     <TextField
                         required

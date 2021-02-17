@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Swal from 'sweetalert2';
 
 const useStyles = makeStyles({
     table: {
@@ -69,8 +70,35 @@ export const Solicitudes = () => {
     }
 
     const handleEdit = (id) => {
-        var url = "/admin/solicitudes/editar/" + id
-        history.push(url)
+        Swal.fire({
+            title: 'Estado',
+            input: 'select',
+            inputOptions: {
+              'Estados': {
+                'Abierta': 'Abierta',
+                'En Proceso': 'En proceso',
+                'Cerrada': 'Cerrada'
+              }
+            },
+            inputPlaceholder: 'Seleccione un estado',
+            showCancelButton: true,
+            inputValidator: (value) => {
+                var data = {
+                    estado: value
+                }
+                axios.put('http://localhost:5000/solicitud/'+id, data)
+                    .then(res => {
+                        axios.get('http://localhost:5000/solicitud/')
+                            .then((response) => {
+                                setSolicitudes(response.data);
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                            })
+                    })
+                    .catch(err => console.log(err))
+            }
+        })
     }
     
     function handleClose(res, solicitud){
