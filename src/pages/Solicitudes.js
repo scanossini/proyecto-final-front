@@ -45,7 +45,6 @@ export const Solicitudes = () => {
     const history = useHistory();
     const [solicitudes, setSolicitudes] = useState("");
     const [hospitales, setHospitales] = useState("");
-    const [open, setOpen] = useState(false);
 
     useEffect(() => {
         axios.get('http://localhost:5000/solicitud/')
@@ -100,12 +99,6 @@ export const Solicitudes = () => {
             }
         })
     }
-    
-    function handleClose(res, solicitud){
-        if(res === true)
-            axiosDelete(solicitud);
-        setOpen(false);
-    };
 
     function axiosDelete(solicitud){
         axios.delete(`http://localhost:5000/solicitud/${solicitud._id}`)
@@ -138,26 +131,10 @@ export const Solicitudes = () => {
                         <TableBody>
                             {
                                 solicitudes.map((solicitud) => (    
-                                <>   
-                                    <Dialog
-                                    open={open}
-                                    onClose={handleClose}
-                                    aria-labelledby="alert-dialog-title"
-                                    aria-describedby="alert-dialog-description"
-                                    >
-                                        <DialogTitle id="alert-dialog-title">{"¿Eliminar solicitud?"}</DialogTitle>
-                                        <DialogActions>
-                                            <Button onClick={() => handleClose(false, null)} color="primary">
-                                            Cancelar
-                                            </Button>
-                                            <Button onClick={() => handleClose(true, solicitud)} color="primary" autoFocus>
-                                            Aceptar
-                                            </Button>
-                                        </DialogActions>
-                                    </Dialog>                             
+                                <>                        
                                     <TableRow hover>
                                         <TableCell>{nombreHospital(solicitud.hospital)}</TableCell>
-                                        <TableCell>{solicitud.cantidad}</TableCell>
+                                        <TableCell>{solicitud.donantes+"/"+solicitud.cantidad}</TableCell>
                                         <TableCell>{solicitud.tipoDeSangre}</TableCell>
                                         <TableCell>{solicitud.estado}</TableCell>
                                         <TableCell>
@@ -172,7 +149,7 @@ export const Solicitudes = () => {
                                             <Tooltip title="Eliminar" aria-label="eliminar">
                                                 <IconButton 
                                                     className={classes.deleteButton}
-                                                    onClick= {() => setOpen(true)}
+                                                    onClick= {() => axiosDelete(solicitud)}
                                                 >
                                                 <DeleteIcon color="secondary" />
                                                 </IconButton>
