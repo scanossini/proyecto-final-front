@@ -25,6 +25,15 @@ export const Parametros = () => {
         document.getElementById("serologia").value = hospital[0].diasSerologia
     }
 
+    const handleClick = () => {
+        var data = {
+            diasSinDonar: donacion,
+            diasSerologia: serologia
+        }
+
+        axios.put('http://localhost:5000/hospital/'+id, data)
+    }
+
     return (
         <Container>
             <Typography variant="h6" gutterBottom>Parámetros de donación</Typography>
@@ -72,6 +81,7 @@ export const Parametros = () => {
                     disabled={id === "" ? true : false}
                     variant="contained"
                     color="primary"
+                    onClick={handleClick}
                 >
                     Actualizar
                 </Button>
