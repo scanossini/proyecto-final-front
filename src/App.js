@@ -13,7 +13,7 @@ const App = () => {
                     <Route exact path='/' component={LogIn} />
                     <Auth>
                         <Route path="/admin" component={AuthRoutes} />
-                    </Auth>
+                    </Auth>         
                 </Switch>
             </Router>
         </div> 

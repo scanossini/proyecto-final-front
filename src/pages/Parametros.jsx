@@ -21,8 +21,8 @@ export const Parametros = () => {
     const setearValores = (event) => {
         setId(event.target.value)
         var hospital = hospitales.filter(hospital => hospital._id === event.target.value)
-        document.getElementById("donacion").value = hospital[0].diasSinDonar
-        document.getElementById("serologia").value = hospital[0].diasSerologia
+        setDonacion(hospital[0].diasSinDonar)
+        setSerologia(hospital[0].diasSerologia)
     }
 
     const handleClick = () => {
@@ -62,6 +62,7 @@ export const Parametros = () => {
                         inputProps={{ min: 1, max: 10 }}
                         type="number"
                         fullWidth
+                        value={donacion}
                         onChange={(event) => setDonacion(event.target.value)}
                     />
                 </Grid>
@@ -74,6 +75,7 @@ export const Parametros = () => {
                         inputProps={{ min: 1, max: 10 }}
                         type="number"
                         fullWidth
+                        value={serologia}
                         onChange={(event) => setSerologia(event.target.value)}
                     />
                 </Grid>
