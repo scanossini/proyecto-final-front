@@ -1,10 +1,11 @@
-import { Container, Fab, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
+import { Container, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import Tooltip from '@material-ui/core/tooltip';
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles({
   table: {
@@ -36,6 +37,7 @@ const useStyles = makeStyles({
 export const Donantes = () => {
   const [donantes, setDonantes] = useState([])
   const classes = useStyles();
+  const history = useHistory();
 
   useEffect(() => {
     axios.get('http://localhost:5000/donante/')
@@ -80,6 +82,7 @@ export const Donantes = () => {
                           <Tooltip title="Banco de sangre" aria-label="banco de sangre">
                               <IconButton 
                                   className={classes.hospitalIcon}
+                                  onClick={() => history.push('donantes/'+donante._id)}
                               >
                                 <LocalHospitalIcon color="secondary" />
                               </IconButton>
