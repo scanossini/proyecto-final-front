@@ -6,6 +6,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import Tooltip from '@material-ui/core/tooltip';
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 import { useHistory } from 'react-router-dom';
+import { Spinner } from '../components/Spinner/Spinner';
 
 const useStyles = makeStyles({
   table: {
@@ -51,6 +52,7 @@ export const Donantes = () => {
   
   return (
     <Container>
+      { donantes.length > 0 ? 
       <TableContainer component={Paper} className={classes.container}> 
         <Table stickyHeader className={classes.table}>
           <TableHead>
@@ -95,6 +97,7 @@ export const Donantes = () => {
           </TableBody>
         </Table>
       </TableContainer>
+      : <Spinner /> }
     </Container>
   );
 }

@@ -1,6 +1,7 @@
 import { Container, Fab, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { Spinner } from '../components/Spinner/Spinner'
 import AddIcon from "@material-ui/icons/Add";
 import { useHistory } from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
@@ -157,7 +158,7 @@ export const Solicitudes = () => {
                             }
                         </TableBody>
                     </Table>
-                </TableContainer> : null
+                </TableContainer> : <Spinner />
             }
             <Fab onClick={handleCreation} className={classes.button} color="primary" aria-label="add">
                 <AddIcon />

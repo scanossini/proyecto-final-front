@@ -5,6 +5,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddIcon from "@material-ui/icons/Add";
 import { useHistory } from 'react-router-dom';
+import { Spinner } from '../components/Spinner/Spinner'
 
 const useStyles = makeStyles({
     table: {
@@ -85,7 +86,7 @@ export const Hospitales = () => {
                             }
                         </TableBody>
                     </Table>
-                </TableContainer> : null
+                </TableContainer> : <Spinner />
             }
             <Fab className={classes.button} onClick={()=>history.push("/admin/hospitales/crear")} color="primary" aria-label="add">
                 <AddIcon />

@@ -1,5 +1,6 @@
 import { Button, Container, Grid, TextField, Typography } from '@material-ui/core';
 import axios from 'axios';
+import { useSnackbar } from 'notistack';
 import React, { useEffect, useState } from 'react';
 
 export const BancoDeSangre = (props) =>{
@@ -12,6 +13,7 @@ export const BancoDeSangre = (props) =>{
     const [htlv, setHtlv] = useState("");
     const [chagas, setChagas] = useState("");
     const [brucelosis, setBrucelosis] = useState("");
+    const { enqueueSnackbar } = useSnackbar();
 
     useEffect(() => {
         axios.get('http://localhost:5000/banco/'+id)
@@ -46,7 +48,7 @@ export const BancoDeSangre = (props) =>{
         }
         
         axios.put('http://localhost:5000/banco/'+banco._id, data)
-            .then(res => console.log(res))
+            .then(res => enqueueSnackbar("Datos actualizados", {variant: "success"}))
             .catch(err => console.log(err))
     }
     

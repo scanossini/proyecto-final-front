@@ -1,3 +1,4 @@
+import { SnackbarProvider } from 'notistack';
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
@@ -7,16 +8,24 @@ import AuthRoutes from './Middleware/AuthRoutes'
 
 const App = () => {
     return (
-        <div>
-            <Router>
-                <Switch>
-                    <Route exact path='/' component={LogIn} />
-                    <Auth>
-                        <Route path="/admin" component={AuthRoutes} />
-                    </Auth>         
-                </Switch>
-            </Router>
-        </div> 
+        <SnackbarProvider
+            maxSnack={3}
+            anchorOrigin={{
+            vertical: "top",
+            horizontal: "right",
+            }}
+        >
+            <div>
+                <Router>
+                    <Switch>
+                        <Route exact path='/' component={LogIn} />
+                        <Auth>
+                            <Route path="/admin" component={AuthRoutes} />
+                        </Auth>         
+                    </Switch>
+                </Router>
+            </div> 
+        </SnackbarProvider>
     );
 }
 
