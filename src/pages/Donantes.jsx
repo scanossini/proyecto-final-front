@@ -1,4 +1,4 @@
-import { Container, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
+import { Container, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@material-ui/core';
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import IconButton from '@material-ui/core/IconButton';
@@ -7,6 +7,7 @@ import Tooltip from '@material-ui/core/tooltip';
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 import { useHistory } from 'react-router-dom';
 import { Spinner } from '../components/Spinner/Spinner';
+import swal from '@sweetalert/with-react';
 
 const useStyles = makeStyles({
   table: {
@@ -49,6 +50,44 @@ export const Donantes = () => {
                 console.log(error);
             })
   }, [])
+
+  const handleEdit = (id) => {
+    var date = new Date();
+    var today = date.getFullYear() + '-'
+                + ('0' + (date.getMonth()+1)).slice(-2) + '-'
+                + ('0' + date.getDate()).slice(-2);
+    swal(
+      <div>
+        <TextField 
+          id="fechaDon"
+          name="fechaDon"
+          label="Fecha de última donación"
+          type="date"
+          defaultValue={today}
+          fullWidth
+        />
+      </div>
+    ).then(() => {
+      var data = {
+        date: document.getElementById("fechaDon").value
+      }
+      axios.put('http://localhost:5000/donante/'+id, data)
+        .then(res => {
+          axios.get('http://localhost:5000/donante/')
+            .then((response) => {
+                setDonantes(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            })}
+        )
+    })
+  }
+
+  const fechaDon = (fecha) => {
+    var date = new Date(fecha)
+    return (date.getDate()+1)+"/"+(date.getMonth()+1)+"/"+date.getFullYear()
+  }
   
   return (
     <Container>
@@ -72,11 +111,12 @@ export const Donantes = () => {
                       <TableCell>{donante.nombre}</TableCell>
                       <TableCell>{donante.apellido}</TableCell>
                       <TableCell>{donante.dni}</TableCell>
-                      <TableCell>{donante.fechaDonacion}</TableCell>
+                      <TableCell>{fechaDon(donante.fechaDonacion)}</TableCell>
                       <TableCell>
                           <Tooltip title="Editar" aria-label="editar">
                               <IconButton 
                                   className={classes.editButton}
+                                  onClick={() => handleEdit(donante._id)}
                               >
                                 <EditIcon color="action" />
                               </IconButton>
