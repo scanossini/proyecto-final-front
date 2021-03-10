@@ -100,6 +100,7 @@ export const Donantes = () => {
               <TableCell>Apellido</TableCell>
               <TableCell>DNI</TableCell>
               <TableCell>Última fecha de donación</TableCell>
+              <TableCell>Anotado para donar</TableCell>
               <TableCell>Operación</TableCell>
             </TableRow>
           </TableHead>
@@ -112,6 +113,7 @@ export const Donantes = () => {
                       <TableCell>{donante.apellido}</TableCell>
                       <TableCell>{donante.dni}</TableCell>
                       <TableCell>{fechaDon(donante.fechaDonacion)}</TableCell>
+                      <TableCell>{donante.anotadoEnSolicitud ? "Sí" : "No"}</TableCell>
                       <TableCell>
                           <Tooltip title="Editar" aria-label="editar">
                               <IconButton 
