@@ -3,6 +3,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Spinner } from '../components/Spinner/Spinner'
 import AddIcon from "@material-ui/icons/Add";
+import FilterListIcon from '@material-ui/icons/FilterList';
 import { useHistory } from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
@@ -20,6 +21,11 @@ const useStyles = makeStyles({
     button: {
         position: "fixed",
         right: "100px",
+        bottom: "40px",
+    },
+    button2: {
+        position: "fixed",
+        right: "180px",
         bottom: "40px",
     },
     container: {
@@ -42,6 +48,7 @@ export const Solicitudes = () => {
     const history = useHistory();
     const [solicitudes, setSolicitudes] = useState("");
     const [hospitales, setHospitales] = useState("");
+    const [tipo, setTipo] = useState("");
 
     useEffect(() => {
         axios.get('http://localhost:5000/solicitud/')
@@ -111,6 +118,31 @@ export const Solicitudes = () => {
         return hospital[0].nombre
     }
 
+    const handleFilter = () => {
+        swal.fire({
+            title: 'Filtrar tabla de solicitudes',
+            input: 'select',
+            inputOptions: {
+              'Tipos de sangre': {
+                '': 'Todos',
+                'A+': 'A+',
+                'B+': 'B+',
+                '0+': '0+',
+                'AB+': 'AB+',
+                'A-': 'A-',
+                'B-': 'B-',
+                '0-': '0-',
+                'AB-': 'AB-'
+              }
+            },
+            inputPlaceholder: 'Seleccione un tipo de sangre',
+            showCancelButton: true,
+            inputValidator: (value) => {
+                setTipo(value);
+            }
+        })
+    }
+
     return (
         <Container>
             { solicitudes && hospitales ? 
@@ -127,7 +159,7 @@ export const Solicitudes = () => {
                         </TableHead>
                         <TableBody>
                             {
-                                solicitudes.map((solicitud) => (    
+                                solicitudes.filter(solicitud => solicitud.tipoDeSangre.includes(tipo)).map((solicitud) => (    
                                 <>                        
                                     <TableRow hover>
                                         <TableCell>{nombreHospital(solicitud.hospital)}</TableCell>
@@ -162,6 +194,9 @@ export const Solicitudes = () => {
             }
             <Fab onClick={handleCreation} className={classes.button} color="primary" aria-label="add">
                 <AddIcon />
+            </Fab>
+            <Fab onClick={handleFilter} className={classes.button2} color="primary" aria-label="add">
+                <FilterListIcon />
             </Fab>
        </Container>
     )
