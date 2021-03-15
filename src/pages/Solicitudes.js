@@ -8,7 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Tooltip from '@material-ui/core/tooltip';
-import swal from '@sweetalert/with-react';
+import swal from 'sweetalert2';
 
 const useStyles = makeStyles({
     table: {
