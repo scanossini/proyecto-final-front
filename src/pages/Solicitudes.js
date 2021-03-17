@@ -143,6 +143,14 @@ export const Solicitudes = () => {
         })
     }
 
+    const filterList = () => {
+        var filter;
+        tipo !== "" ? 
+            filter = solicitudes.filter(solicitud => solicitud.tipoDeSangre === tipo) 
+            : filter = solicitudes
+        return filter
+    }
+
     return (
         <Container>
             { solicitudes && hospitales ? 
@@ -159,7 +167,7 @@ export const Solicitudes = () => {
                         </TableHead>
                         <TableBody>
                             {
-                                solicitudes.filter(solicitud => solicitud.tipoDeSangre.includes(tipo)).map((solicitud) => (    
+                                filterList().map((solicitud) => (    
                                 <>                        
                                     <TableRow hover>
                                         <TableCell>{nombreHospital(solicitud.hospital)}</TableCell>

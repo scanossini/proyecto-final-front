@@ -121,7 +121,7 @@ export const Donantes = () => {
                       <TableCell>{donante.nombre}</TableCell>
                       <TableCell>{donante.apellido}</TableCell>
                       <TableCell>{donante.dni}</TableCell>
-                      <TableCell>{fechaDon(donante.fechaDonacion)}</TableCell>
+                      <TableCell>{donante.fechaDonacion ? fechaDon(donante.fechaDonacion) : "N/A"}</TableCell>
                       <TableCell>{donante.anotadoEnSolicitud ? "Sí" : "No"}</TableCell>
                       <TableCell>
                           <Tooltip title="Editar" aria-label="editar">
