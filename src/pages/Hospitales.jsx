@@ -54,7 +54,7 @@ export const Hospitales = () => {
         <Container>
             { hospitales ? 
                 <TableContainer className={classes.container} component={Paper}> 
-                    <Table stickyHeader className={classes.table}>
+                    <Table className={classes.table}>
                         <TableHead>
                             <TableRow className={classes.head}>
                                 <TableCell>Hospital</TableCell>
