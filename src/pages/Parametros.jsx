@@ -1,12 +1,15 @@
 import { Button, Container, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from '@material-ui/core';
 import axios from 'axios';
+import { useSnackbar } from 'notistack';
 import React, { useEffect, useState } from 'react'
+import swal from 'sweetalert';
 
 export const Parametros = () => {
     const [hospitales, setHospitales] = useState([]);
     const [id, setId] = useState("");
     const [donacion, setDonacion] = useState("");
     const [serologia, setSerologia] = useState("");
+    const { enqueueSnackbar } = useSnackbar();
 
     useEffect(() => {
         axios.get('http://localhost:5000/hospital/')
@@ -31,7 +34,9 @@ export const Parametros = () => {
             diasSerologia: serologia
         }
 
-        axios.put('http://localhost:5000/hospital/'+id, data)
+        axios.put('http://localhost:5000/hospital/'+id, data, {"headers": {"token": sessionStorage.getItem("token")}})
+            .then(res => enqueueSnackbar("Datos actualizados", {variant: "success"}))
+            .catch(err => swal(err.response.data, "", "error"))
     }
 
     return (
