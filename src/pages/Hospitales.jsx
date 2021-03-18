@@ -38,9 +38,13 @@ const useStyles = makeStyles({
 export const Hospitales = () => {
     const classes = useStyles();
     const history = useHistory();
+    const [admin, setAdmin] = useState("");
     const [hospitales, setHospitales] = useState("");
 
     useEffect(() => {
+        axios.get("http://localhost:5000/admin/info", {"headers": {"token": sessionStorage.getItem("token")}})
+            .then(res => setAdmin(res.data))
+
         axios.get('http://localhost:5000/hospital/')
             .then((response) => {
                 setHospitales(response.data);
@@ -88,9 +92,12 @@ export const Hospitales = () => {
                     </Table>
                 </TableContainer> : <Spinner />
             }
-            <Fab className={classes.button} onClick={()=>history.push("/admin/hospitales/crear")} color="primary" aria-label="add">
-                <AddIcon />
-            </Fab>
+            {   
+                !admin.hospital ?
+                <Fab className={classes.button} onClick={()=>history.push("/admin/hospitales/crear")} color="primary" aria-label="add">
+                    <AddIcon />
+                </Fab> : null
+            }
        </Container>
     )
 }
