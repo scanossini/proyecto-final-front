@@ -2,7 +2,6 @@ import React from 'react';
 import * as AiIcons from "react-icons/ai";
 import * as BiIcons from "react-icons/bi";
 import * as IoIcons from "react-icons/io5";
-import * as IoIcons2 from "react-icons/io";
 
 export const SidebarData = [
     {
@@ -32,7 +31,13 @@ export const SidebarData = [
     {
         title: 'Hospitales',
         path: '/admin/hospitales',
-        icon: <IoIcons2.IoMdLocate />,
+        icon: <AiIcons.AiFillEnvironment />,
+        cName: 'nav-text'
+    },
+    {
+        title: 'Gestionar Administradores',
+        path: '/admin/admins',
+        icon: <AiIcons.AiFillUnlock/>,
         cName: 'nav-text'
     },
     {
