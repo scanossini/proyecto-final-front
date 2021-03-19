@@ -6,6 +6,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import AddIcon from "@material-ui/icons/Add";
 import { useHistory } from 'react-router-dom';
 import { Spinner } from '../components/Spinner/Spinner'
+import swal from 'sweetalert';
 
 const useStyles = makeStyles({
     table: {
@@ -55,10 +56,13 @@ export const Hospitales = () => {
     }, [])
 
     const handleDelete = (id) => {
-        axios.delete("http://localhost:5000/hospital/"+id)
+        axios.delete("http://localhost:5000/hospital/"+id, {"headers": {"token": sessionStorage.getItem("token")}})
             .then(() => {
                 var hospis = hospitales.filter(hospital => hospital._id !== id);
                 setHospitales(hospis)
+            })
+            .catch((err) => {
+                swal(err.response.data, "", "error")
             })
     }
 
