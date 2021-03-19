@@ -54,6 +54,14 @@ export const Hospitales = () => {
             })
     }, [])
 
+    const handleDelete = (id) => {
+        axios.delete("http://localhost:5000/hospital/"+id)
+            .then(() => {
+                var hospis = hospitales.filter(hospital => hospital._id !== id);
+                setHospitales(hospis)
+            })
+    }
+
     return(
         <Container>
             { hospitales ? 
@@ -80,6 +88,7 @@ export const Hospitales = () => {
                                             <Tooltip title="Eliminar" aria-label="eliminar">
                                                 <IconButton
                                                    className={classes.deleteButton}
+                                                   onClick={() => handleDelete(hospital._id)}
                                                 >
                                                 <DeleteIcon color="secondary" />
                                                 </IconButton>
