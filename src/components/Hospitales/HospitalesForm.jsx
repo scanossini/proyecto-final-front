@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import Map from '../Map/Map'
 
 const useStyles = makeStyles((theme) => ({
     buttons: {
@@ -88,6 +89,14 @@ export const HospitalesForm = () => {
                                 type="number"
                                 fullWidth
                                 onChange={(event) => setLongitud(event.target.value)}
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <Map 
+                                googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDI4eXkh46mcHYH1Qfuxp4x18sBgQG7pfc"
+                                containerElement={<div style={{height: "400px"}}/>}
+                                mapElement={<div style={{height: "100%"}}/>}
+                                loadingElement={<p>Cargando...</p>}
                             />
                         </Grid>
                     </Grid>
