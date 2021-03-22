@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Container, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from '@material-ui/core'
 import { useSnackbar } from 'notistack';
 import swal from 'sweetalert';
+import { Spinner } from '../components/Spinner/Spinner';
 
 export const Administradores = () => {
     const [admin, setAdmin] = useState("");
@@ -92,7 +93,7 @@ export const Administradores = () => {
                     </div>
                 </Container>
             : <h1>Esto solo puede ser accedido por el administrador general</h1>
-        : null
+        : <Spinner />
     )
 
 }

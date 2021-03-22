@@ -74,6 +74,7 @@ export const Hospitales = () => {
                         <TableHead>
                             <TableRow className={classes.head}>
                                 <TableCell>Hospital</TableCell>
+                                <TableCell>Localización</TableCell>
                                 <TableCell>Operación</TableCell>
                             </TableRow>
                         </TableHead>
@@ -82,6 +83,7 @@ export const Hospitales = () => {
                                 hospitales.map((hospital) => (
                                     <TableRow hover>
                                         <TableCell>{hospital.nombre}</TableCell>
+                                        <TableCell>{hospital.direccion + ", " + hospital.ciudad}</TableCell>
                                         <TableCell>
                                             <Tooltip title="Editar" aria-label="editar">
                                                 <IconButton

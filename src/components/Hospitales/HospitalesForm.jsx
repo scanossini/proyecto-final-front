@@ -39,7 +39,9 @@ export const HospitalesForm = () => {
         var data = {
             nombre: nombre,
             lat: latLng.lat,
-            lng: latLng.lng
+            lng: latLng.lng,
+            direccion: direccion,
+            ciudad: ciudad
         }
 
         axios.post('http://localhost:5000/hospital', data)
