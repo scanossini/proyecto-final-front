@@ -22,8 +22,9 @@ export const HospitalesForm = () => {
     const history = useHistory();
     const [admin, setAdmin] = useState("");
     const [nombre, setNombre] = useState("");
-    const [latitud, setLatitud] = useState("");
-    const [longitud, setLongitud] = useState("");
+    const [direccion, setDireccion] = useState("");
+    const [ciudad, setCiudad] = useState("");
+    const [latLng, setLatLng] = useState("");
 
     useEffect(() => {
         axios.get("http://localhost:5000/admin/info", {"headers": {"token": sessionStorage.getItem("token")}})
@@ -37,8 +38,8 @@ export const HospitalesForm = () => {
     const handleCreate = () => {
         var data = {
             nombre: nombre,
-            lat: latitud,
-            lng: longitud
+            lat: latLng.lat,
+            lng: latLng.lng
         }
 
         axios.post('http://localhost:5000/hospital', data)
@@ -48,6 +49,20 @@ export const HospitalesForm = () => {
                     .catch(err => console.log(err))
     }
 
+    const handleAddress = () => {
+        if (!ciudad || !direccion) return null
+        
+        axios.get("https://maps.googleapis.com/maps/api/geocode/json", {
+            params: {
+                address: direccion + ", " + ciudad,
+                key: "AIzaSyDI4eXkh46mcHYH1Qfuxp4x18sBgQG7pfc"
+            }
+        }).then(res => {
+            var location = res.data.results[0].geometry.location
+            setLatLng({lat: location.lat, lng: location.lng})
+        })
+    }
+    
     return(
         admin ?
             !admin.hospital ?
@@ -70,33 +85,43 @@ export const HospitalesForm = () => {
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 required
-                                id="latitud"
-                                name="latitud"
-                                label="Latitud"
+                                id="direccion"
+                                name="direccion"
+                                label="Dirección"
                                 inputProps={{ min: 1, max: 10 }}
-                                type="number"
                                 fullWidth
-                                onChange={(event) => setLatitud(event.target.value)}
+                                onChange={(event) => setDireccion(event.target.value)}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 required
-                                id="longitud"
-                                name="longitud"
-                                label="Longitud"
+                                id="ciudad"
+                                name="ciudad"
+                                label="Ciudad"
                                 inputProps={{ min: 1, max: 10 }}
-                                type="number"
                                 fullWidth
-                                onChange={(event) => setLongitud(event.target.value)}
+                                onChange={(event) => setCiudad(event.target.value)}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                className={classes.button}
+                                onClick={handleAddress}
+                            >
+                                Buscar en el mapa
+                            </Button>
+                        </Grid>
+                        <Grid item xs={12} sm={12}>
                             <Map 
                                 googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDI4eXkh46mcHYH1Qfuxp4x18sBgQG7pfc"
                                 containerElement={<div style={{height: "400px"}}/>}
                                 mapElement={<div style={{height: "100%"}}/>}
                                 loadingElement={<p>Cargando...</p>}
+                                onInput={(event) => setLatLng({lat: event.latLng.lat(), lng: event.latLng.lng()})}
+                                marker={latLng}
                             />
                         </Grid>
                     </Grid>

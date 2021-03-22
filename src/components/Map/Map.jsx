@@ -2,20 +2,15 @@ import React, { useState } from 'react';
 import { GoogleMap, withScriptjs, withGoogleMap, Marker } from 'react-google-maps';
 
 const Map = (props) => {
-    const [marker, setMarker] = useState("")
-
-    const handleClick = (event) => {
-        var position = event.latLng
-        setMarker({lat: position.lat(), lng: position.lng()})
-    }
+    const defaultCenter = {lat: -38.71883, lng: -62.2670513}
 
     return (
         <GoogleMap 
             defaultZoom={14}
-            defaultCenter={{lat: -38.71883, lng: -62.2670513}}
-            onClick={event => handleClick(event)}
+            onClick={props.onInput}
+            center={props.marker ? props.marker : defaultCenter}
         >
-            { marker ? <Marker position={{lat: marker.lat, lng: marker.lng}} /> : null }
+            { props.marker ? <Marker position={{lat: props.marker.lat, lng: props.marker.lng}} /> : null }
         </GoogleMap>
     )
 }
