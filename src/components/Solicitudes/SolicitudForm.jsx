@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import swal from 'sweetalert'
 
 const useStyles = makeStyles((theme) => ({
     buttons: {
@@ -23,6 +24,7 @@ export const SolicitudForm = () => {
     const [cantidad, setCantidad] = useState("");
     const [tipo, setTipo] = useState("");
     const [hospitales, setHospitales] = useState("");
+    const [radio, setRadio] = useState("");
 
     useEffect(() => {
         axios.get('http://localhost:5000/hospital/')
@@ -44,7 +46,7 @@ export const SolicitudForm = () => {
             cantidad: cantidad,
             hospital: hospital,
             tipoDeSangre: tipo,
-            radio: 50,
+            radio: radio,
             tiempoIncompleta: 10
         }
 
@@ -52,7 +54,7 @@ export const SolicitudForm = () => {
                     .then(res => {
                         history.push("/admin/solicitudes")
                     })
-                    .catch(err => console.log(err))
+                    .catch(err => swal(err.response.data, "", "error"))
     }
 
     return(
@@ -86,6 +88,18 @@ export const SolicitudForm = () => {
                         type="number"
                         fullWidth
                         onChange={(event) => setCantidad(event.target.value)}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField
+                        required
+                        id="radio"
+                        name="radio"
+                        label="Radio de notificaciones (en Kilómetros)"
+                        inputProps={{ min: 1, max: 10 }}
+                        type="number"
+                        fullWidth
+                        onChange={(event) => setRadio(event.target.value)}
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>

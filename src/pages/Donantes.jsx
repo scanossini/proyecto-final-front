@@ -100,7 +100,6 @@ export const Donantes = () => {
   return (
     <Container>
       <SearchBar onInput={(event) => setInput(event.target.value)} onSearch={handleSearch} />
-      { donantes.length > 0 ? 
       <TableContainer component={Paper} className={classes.container}> 
         <Table stickyHeader className={classes.table}>
           <TableHead>
@@ -115,6 +114,7 @@ export const Donantes = () => {
           </TableHead>
           <TableBody>
               {
+                donantes.length > 0 ? 
                 donantes.map((donante) => (    
                 <>                        
                   <TableRow hover>
@@ -124,7 +124,7 @@ export const Donantes = () => {
                       <TableCell>{donante.fechaDonacion ? fechaDon(donante.fechaDonacion) : "N/A"}</TableCell>
                       <TableCell>{donante.anotadoEnSolicitud ? "Sí" : "No"}</TableCell>
                       <TableCell>
-                          <Tooltip title="Editar" aria-label="editar">
+                          <Tooltip title="Registrar fecha de donación" aria-label="editar">
                               <IconButton 
                                   className={classes.editButton}
                                   onClick={() => handleEdit(donante._id)}
@@ -143,12 +143,11 @@ export const Donantes = () => {
                       </TableCell>
                   </TableRow>
                 </>
-                ))
+                )) : null
               }
           </TableBody>
         </Table>
       </TableContainer>
-      : null }
     </Container>
   );
 }

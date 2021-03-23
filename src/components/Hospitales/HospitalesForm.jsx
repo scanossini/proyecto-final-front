@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import swal from 'sweetalert'
 import Map from '../Map/Map'
 
 const useStyles = makeStyles((theme) => ({
@@ -48,7 +49,7 @@ export const HospitalesForm = () => {
                     .then(res => {
                         history.push("/admin/hospitales")
                     })
-                    .catch(err => console.log(err))
+                    .catch(err => swal(err.response.data, "", "error"))
     }
 
     const handleAddress = () => {
@@ -108,12 +109,11 @@ export const HospitalesForm = () => {
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <Button
-                                variant="contained"
                                 color="primary"
                                 className={classes.button}
                                 onClick={handleAddress}
                             >
-                                Buscar en el mapa
+                                Localizar en el mapa
                             </Button>
                         </Grid>
                         <Grid item xs={12} sm={12}>

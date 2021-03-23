@@ -28,7 +28,7 @@ export const Home = () => {
                     <Box m={2}>
                         <Divider variant="middle" />
                     </Box>
-                    <Typography>
+                    <Typography variant="h6">
                       {!admin.hospital ? 
                         "Esta cuenta tiene permisos para administrar tanto solicitudes como todos los hospitales y crear administradores." : 
                         "Esta cuenta tiene permisos para administrar los párametros del hospital al que pertenece y gestionar cualquier tipo de solicitud."
