@@ -99,7 +99,6 @@ export const Donantes = () => {
   
   return (
     <Container>
-      {handleSearch()}
       <SearchBar onInput={(event) => setInput(event.target.value)} onSearch={handleSearch} />
       <TableContainer component={Paper} className={classes.container}> 
         <Table className={classes.table}>
