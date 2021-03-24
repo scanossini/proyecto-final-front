@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { GoogleMap, withScriptjs, withGoogleMap, Marker } from 'react-google-maps';
 
 const Map = (props) => {
