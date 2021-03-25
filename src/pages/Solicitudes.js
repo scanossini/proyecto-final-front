@@ -10,6 +10,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Tooltip from '@material-ui/core/tooltip';
 import swal from 'sweetalert2';
+import Swal from 'sweetalert2';
 
 const useStyles = makeStyles({
     table: {
@@ -105,12 +106,23 @@ export const Solicitudes = () => {
     }
 
     function axiosDelete(solicitud){
-        axios.delete(`http://localhost:5000/solicitud/${solicitud._id}`)
-        .then(res => {
-            setSolicitudes(solicitudes.filter(solicitud2 => solicitud2._id !== solicitud._id))
-            history.push("/admin/solicitudes")
+        Swal.fire({
+            title: "Desea eliminar la solicitud?",
+            showDenyButton: true,
+            denyButtonText: "No, cancelar",
+            confirmButtonText: "Sí, deseo eliminar"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete(`http://localhost:5000/solicitud/${solicitud._id}`)
+                    .then(res => {
+                        setSolicitudes(solicitudes.filter(solicitud2 => solicitud2._id !== solicitud._id))
+                        history.push("/admin/solicitudes")
+                    })
+                    .catch(err =>console.log(err))
+            }
         })
-        .catch(err =>console.log(err))
+
+        
     }
     
     const nombreHospital = (id) => {
@@ -159,6 +171,7 @@ export const Solicitudes = () => {
                         <TableHead>
                             <TableRow className={classes.head}>
                                 <TableCell>Hospital</TableCell>
+                                <TableCell>Persona donada</TableCell>
                                 <TableCell>Donaciones</TableCell>
                                 <TableCell>Tipo</TableCell>
                                 <TableCell>Estado</TableCell>
@@ -171,6 +184,7 @@ export const Solicitudes = () => {
                                 <>                        
                                     <TableRow hover>
                                         <TableCell>{nombreHospital(solicitud.hospital)}</TableCell>
+                                        <TableCell>{solicitud.persona}</TableCell>
                                         <TableCell>{solicitud.donantes+"/"+solicitud.cantidad}</TableCell>
                                         <TableCell>{solicitud.tipoDeSangre}</TableCell>
                                         <TableCell>{solicitud.estado}</TableCell>

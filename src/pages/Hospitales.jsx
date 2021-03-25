@@ -7,6 +7,7 @@ import AddIcon from "@material-ui/icons/Add";
 import { useHistory } from 'react-router-dom';
 import { Spinner } from '../components/Spinner/Spinner'
 import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 
 const useStyles = makeStyles({
     table: {
@@ -56,14 +57,23 @@ export const Hospitales = () => {
     }, [])
 
     const handleDelete = (id) => {
-        axios.delete("http://localhost:5000/hospital/"+id, {"headers": {"token": sessionStorage.getItem("token")}})
-            .then(() => {
-                var hospis = hospitales.filter(hospital => hospital._id !== id);
-                setHospitales(hospis)
-            })
-            .catch((err) => {
-                swal(err.response.data, "", "error")
-            })
+        Swal.fire({
+            title: "Desea eliminar la solicitud?",
+            showDenyButton: true,
+            denyButtonText: "No, cancelar",
+            confirmButtonText: "Sí, deseo eliminar"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete("http://localhost:5000/hospital/"+id, {"headers": {"token": sessionStorage.getItem("token")}})
+                    .then(() => {
+                        var hospis = hospitales.filter(hospital => hospital._id !== id);
+                        setHospitales(hospis)
+                    })
+                    .catch((err) => {
+                        swal(err.response.data, "", "error")
+                    })
+            }
+        })
     }
 
     return(

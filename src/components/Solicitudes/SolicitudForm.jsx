@@ -25,6 +25,7 @@ export const SolicitudForm = () => {
     const [tipo, setTipo] = useState("");
     const [hospitales, setHospitales] = useState("");
     const [radio, setRadio] = useState("");
+    const [persona, setPersona] = useState("");
 
     useEffect(() => {
         axios.get('http://localhost:5000/hospital/')
@@ -47,6 +48,7 @@ export const SolicitudForm = () => {
             hospital: hospital,
             tipoDeSangre: tipo,
             radio: radio,
+            persona: persona,
             tiempoIncompleta: 10
         }
 
@@ -77,6 +79,16 @@ export const SolicitudForm = () => {
                                 )) : null}
                             </Select>
                     </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField
+                        required
+                        id="persona"
+                        name="persona"
+                        label="Persona que recibe la donación"
+                        fullWidth
+                        onChange={(event) => setPersona(event.target.value)}
+                    />
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <TextField
