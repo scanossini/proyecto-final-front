@@ -58,7 +58,7 @@ export const Hospitales = () => {
 
     const handleDelete = (id) => {
         Swal.fire({
-            title: "Desea eliminar la solicitud?",
+            title: "Desea eliminar al hospital?",
             showDenyButton: true,
             denyButtonText: "No, cancelar",
             confirmButtonText: "Sí, deseo eliminar"
