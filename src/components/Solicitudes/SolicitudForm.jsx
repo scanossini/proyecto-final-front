@@ -67,17 +67,17 @@ export const SolicitudForm = () => {
             <Grid container spacing={3}>
                 <Grid item xs={12} sm={6}>
                     <FormControl fullWidth>
-                            <InputLabel>Hospital</InputLabel>
-                            <Select
-                                id="hospital"
-                                name="hospital"
-                                value={hospital}
-                                onChange={(event) => setHospital(event.target.value)}   
-                            >
-                                {hospitales ? hospitales.map((hospital) => (
-                                    <MenuItem value={hospital._id}>{hospital.nombre}</MenuItem>
-                                )) : null}
-                            </Select>
+                        <InputLabel>Hospital</InputLabel>
+                        <Select
+                            id="hospital"
+                            name="hospital"
+                            value={hospital}
+                            onChange={(event) => setHospital(event.target.value)}   
+                        >
+                            {hospitales ? hospitales.map((hospital) => (
+                                <MenuItem value={hospital._id}>{hospital.nombre}</MenuItem>
+                            )) : null}
+                        </Select>
                     </FormControl>
                 </Grid>
                 <Grid item xs={12} sm={6}>

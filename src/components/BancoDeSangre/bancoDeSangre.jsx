@@ -1,4 +1,4 @@
-import { Button, Container, Grid, TextField, Typography } from '@material-ui/core';
+import { Button, Container, FormControl, Grid, InputLabel, MenuItem, Select, Typography } from '@material-ui/core';
 import axios from 'axios';
 import { useSnackbar } from 'notistack';
 import React, { useEffect, useState } from 'react';
@@ -6,13 +6,13 @@ import React, { useEffect, useState } from 'react';
 export const BancoDeSangre = (props) =>{
     const id = props.location.pathname.split("/")[3];
     const [banco, setBanco] = useState([]);
-    const [vih, setVih] = useState("");
-    const [sifilis, setSifilis] = useState("");
-    const [hepatitisB, setHepatitisB] = useState("");
-    const [hepatitisC, setHepatitisC] = useState("");
-    const [htlv, setHtlv] = useState("");
-    const [chagas, setChagas] = useState("");
-    const [brucelosis, setBrucelosis] = useState("");
+    const [vih, setVih] = useState(false);
+    const [sifilis, setSifilis] = useState(false);
+    const [hepatitisB, setHepatitisB] = useState(false);
+    const [hepatitisC, setHepatitisC] = useState(false);
+    const [htlv, setHtlv] = useState(false);
+    const [chagas, setChagas] = useState(false);
+    const [brucelosis, setBrucelosis] = useState(false);
     const { enqueueSnackbar } = useSnackbar();
 
     useEffect(() => {
@@ -24,17 +24,17 @@ export const BancoDeSangre = (props) =>{
                     }
                     axios.post('http://localhost:5000/banco/', data)
                         .then(response => setBanco(response.data))
-                } else setBanco(response.data)
-
-                setVih(banco.vih)
-                setSifilis(banco.sifilis)
-                setHepatitisB(banco.hepatitisB)
-                setHepatitisC(banco.hepatitisC)
-                setHtlv(banco.htlv)
-                setChagas(banco.chagas)
-                setBrucelosis(banco.brucelosis)
+                } else 
+                setBanco(response.data)
+                setVih(response.data.vih)
+                setSifilis(response.data.sifilis)
+                setHepatitisB(response.data.hepatitisB)
+                setHepatitisC(response.data.hepatitisC)
+                setHtlv(response.data.htlv)
+                setChagas(response.data.chagas)
+                setBrucelosis(response.data.brucelosis)
             })
-    }, [banco.brucelosis, banco.vih, banco.sifilis, banco.hepatitisB, banco.hepatitisC, banco.htlv, banco.chagas, id])
+    }, [id])
 
     const handleClick = () => {
         var data = {
@@ -59,81 +59,102 @@ export const BancoDeSangre = (props) =>{
             </Typography>
             <Grid container spacing={3}>
                 <Grid item xs={12} sm={4}>
-                        <TextField
+                    <FormControl fullWidth>
+                        <InputLabel>VIH</InputLabel>
+                        <Select
                             id="vih"
                             name="vih"
-                            label="VIH"
-                            type="number"
                             value={vih}
-                            onChange={(event) => setVih(event.target.value)}
-                            fullWidth
-                        />
+                            onChange={(event) => setVih(event.target.value)} 
+                        >
+                            <MenuItem value={true}>Positivo</MenuItem>
+                            <MenuItem value={false}>Negativo</MenuItem>
+                        </Select>
+                    </FormControl>
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                        <TextField
+                    <FormControl fullWidth>
+                        <InputLabel>Sífilis</InputLabel>
+                        <Select
                             id="sifilis"
                             name="sifilis"
-                            label="Sífilis"
-                            type="number"
                             value={sifilis}
-                            onChange={(event) => setSifilis(event.target.value)}
-                            fullWidth
-                        />
+                            onChange={(event) => setSifilis(event.target.value)} 
+                        >
+                            <MenuItem value={true}>Positivo</MenuItem>
+                            <MenuItem value={false}>Negativo</MenuItem>
+                        </Select>
+                    </FormControl>
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                        <TextField
+                    <FormControl fullWidth>
+                        <InputLabel>Chagas</InputLabel>
+                        <Select
                             id="chagas"
                             name="chagas"
-                            label="Chagas"
-                            type="number"
                             value={chagas}
-                            onChange={(event) => setChagas(event.target.value)}
-                            fullWidth
-                        />
+                            onChange={(event) => setChagas(event.target.value)} 
+                        >
+                            <MenuItem value={true}>Positivo</MenuItem>
+                            <MenuItem value={false}>Negativo</MenuItem>
+                        </Select>
+                    </FormControl>
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                        <TextField
+                    <FormControl fullWidth>
+                        <InputLabel>Hepatitis B</InputLabel>
+                        <Select
                             id="hepatitis B"
                             name="hepatitis B"
-                            label="Hepatitis B"
-                            type="number"
                             value={hepatitisB}
-                            onChange={(event) => setHepatitisB(event.target.value)}
-                            fullWidth
-                        />
+                            onChange={(event) => setHepatitisB(event.target.value)} 
+                        >
+                            <MenuItem value={true}>Positivo</MenuItem>
+                            <MenuItem value={false}>Negativo</MenuItem>
+                        </Select>
+                    </FormControl>
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                        <TextField
+                    <FormControl fullWidth>
+                        <InputLabel>Hepatitis C</InputLabel>
+                        <Select
                             id="hepatitis C"
                             name="hepatitis C"
-                            label="Hepatitis C"
-                            type="number"
                             value={hepatitisC}
-                            onChange={(event) => setHepatitisC(event.target.value)}
-                            fullWidth
-                        />
+                            onChange={(event) => setHepatitisC(event.target.value)} 
+                        >
+                            <MenuItem value={true}>Positivo</MenuItem>
+                            <MenuItem value={false}>Negativo</MenuItem>
+                        </Select>
+                    </FormControl>
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                        <TextField
+                    <FormControl fullWidth>
+                        <InputLabel>HTLV</InputLabel>
+                        <Select
                             id="htlv"
                             name="htlv"
-                            label="HTLV"
-                            type="number"
                             value={htlv}
-                            onChange={(event) => setHtlv(event.target.value)}
-                            fullWidth
-                        />
+                            onChange={(event) => setHtlv(event.target.value)} 
+                        >
+                            <MenuItem value={true}>Positivo</MenuItem>
+                            <MenuItem value={false}>Negativo</MenuItem>
+                        </Select>
+                    </FormControl>
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                        <TextField
+                    <FormControl fullWidth>
+                        <InputLabel>Brucelosis</InputLabel>
+                        <Select
                             id="brucelosis"
                             name="brucelosis"
-                            label="Brucelosis"
-                            type="number"
                             value={brucelosis}
-                            onChange={(event) => setBrucelosis(event.target.value)}
-                            fullWidth
-                        />
+                            onChange={(event) => setBrucelosis(event.target.value)} 
+                        >
+                            <MenuItem value={true}>Positivo</MenuItem>
+                            <MenuItem value={false}>Negativo</MenuItem>
+                        </Select>
+                    </FormControl>
                 </Grid>
                 <Button
                     variant="contained"
