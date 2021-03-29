@@ -9,6 +9,7 @@ export const Parametros = () => {
     const [id, setId] = useState("");
     const [donacion, setDonacion] = useState("");
     const [serologia, setSerologia] = useState("");
+    const [radio, setRadio] = useState("");
     const { enqueueSnackbar } = useSnackbar();
 
     useEffect(() => {
@@ -26,12 +27,14 @@ export const Parametros = () => {
         var hospital = hospitales.filter(hospital => hospital._id === event.target.value)
         setDonacion(hospital[0].diasSinDonar)
         setSerologia(hospital[0].diasSerologia)
+        setRadio(hospital[0].radioNotificacion)
     }
 
     const handleClick = () => {
         var data = {
             diasSinDonar: donacion,
-            diasSerologia: serologia
+            diasSerologia: serologia,
+            radio: radio
         }
 
         axios.put('http://localhost:5000/hospital/'+id, data, {"headers": {"token": sessionStorage.getItem("token")}})
@@ -82,6 +85,19 @@ export const Parametros = () => {
                         fullWidth
                         value={serologia}
                         onChange={(event) => setSerologia(event.target.value)}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField
+                        required
+                        id="radio"
+                        name="radio"
+                        label="Radio de notificaciones (en Kilómetros)"
+                        inputProps={{ min: 1, max: 10 }}
+                        type="number"
+                        fullWidth
+                        value={radio}
+                        onChange={(event) => setRadio(event.target.value)}
                     />
                 </Grid>
                 <Button

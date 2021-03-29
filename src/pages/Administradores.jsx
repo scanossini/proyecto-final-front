@@ -69,7 +69,7 @@ export const Administradores = () => {
                     <Typography variant="h6" gutterBottom>
                         Agregar nuevo administrador
                     </Typography>
-                    <Grid container spacing={3}>
+                    <Grid container spacing={3} className="mb-5">
                         <Grid item xs={12} sm={6}>
                             <FormControl fullWidth>
                                     <InputLabel>Hospital</InputLabel>
@@ -105,17 +105,17 @@ export const Administradores = () => {
                                 onChange={(event) => setPassword(event.target.value)}
                             />
                         </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={handleCreate}
+                            >
+                                Crear
+                            </Button>
+                        </Grid>
                     </Grid>
-                    <div>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={handleCreate}
-                        >
-                            Crear
-                        </Button>
-                    </div>
-                    <TableContainer component={Paper}>
+                    <TableContainer component={Paper} className="mt-5">
                         <Table>
                             <TableHead>
                                 <TableRow>

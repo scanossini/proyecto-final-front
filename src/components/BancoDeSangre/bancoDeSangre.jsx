@@ -24,15 +24,16 @@ export const BancoDeSangre = (props) =>{
                     }
                     axios.post('http://localhost:5000/banco/', data)
                         .then(response => setBanco(response.data))
-                } else 
-                setBanco(response.data)
-                setVih(response.data.vih)
-                setSifilis(response.data.sifilis)
-                setHepatitisB(response.data.hepatitisB)
-                setHepatitisC(response.data.hepatitisC)
-                setHtlv(response.data.htlv)
-                setChagas(response.data.chagas)
-                setBrucelosis(response.data.brucelosis)
+                } else {
+                    setBanco(response.data)
+                    setVih(response.data.vih)
+                    setSifilis(response.data.sifilis)
+                    setHepatitisB(response.data.hepatitisB)
+                    setHepatitisC(response.data.hepatitisC)
+                    setHtlv(response.data.htlv)
+                    setChagas(response.data.chagas)
+                    setBrucelosis(response.data.brucelosis)
+                }
             })
     }, [id])
 

@@ -103,18 +103,6 @@ export const SolicitudForm = () => {
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <TextField
-                        required
-                        id="radio"
-                        name="radio"
-                        label="Radio de notificaciones (en Kilómetros)"
-                        inputProps={{ min: 1, max: 10 }}
-                        type="number"
-                        fullWidth
-                        onChange={(event) => setRadio(event.target.value)}
-                    />
-                </Grid>
-                <Grid item xs={12} sm={6}>
                     <FormControl fullWidth>
                         <InputLabel>Tipo de sangre</InputLabel>
                         <Select
