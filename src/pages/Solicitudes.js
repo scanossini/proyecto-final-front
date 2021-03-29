@@ -6,7 +6,6 @@ import AddIcon from "@material-ui/icons/Add";
 import FilterListIcon from '@material-ui/icons/FilterList';
 import { useHistory } from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
-import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Tooltip from '@material-ui/core/tooltip';
 import swal from 'sweetalert2';
@@ -73,38 +72,6 @@ export const Solicitudes = () => {
         history.push("/admin/solicitudes/crear")
     }
 
-    const handleEdit = (id) => {
-        swal.fire({
-            title: 'Estado',
-            input: 'select',
-            inputOptions: {
-              'Estados': {
-                'Abierta': 'Abierta',
-                'En Proceso': 'En proceso',
-                'Cerrada': 'Cerrada'
-              }
-            },
-            inputPlaceholder: 'Seleccione un estado',
-            showCancelButton: true,
-            inputValidator: (value) => {
-                var data = {
-                    estado: value
-                }
-                axios.put('http://localhost:5000/solicitud/'+id, data)
-                    .then(res => {
-                        axios.get('http://localhost:5000/solicitud/')
-                            .then((response) => {
-                                setSolicitudes(response.data);
-                            })
-                            .catch((error) => {
-                                console.log(error);
-                            })
-                    })
-                    .catch(err => console.log(err))
-            }
-        })
-    }
-
     function axiosDelete(solicitud){
         Swal.fire({
             title: "Desea eliminar la solicitud?",
@@ -121,8 +88,6 @@ export const Solicitudes = () => {
                     .catch(err =>console.log(err))
             }
         })
-
-        
     }
     
     const nombreHospital = (id) => {
@@ -175,7 +140,7 @@ export const Solicitudes = () => {
                                 <TableCell>Donaciones</TableCell>
                                 <TableCell>Tipo</TableCell>
                                 <TableCell>Estado</TableCell>
-                                <TableCell>Operación</TableCell>
+                                <TableCell>Eliminar</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -189,14 +154,6 @@ export const Solicitudes = () => {
                                         <TableCell>{solicitud.tipoDeSangre}</TableCell>
                                         <TableCell>{solicitud.estado}</TableCell>
                                         <TableCell>
-                                            <Tooltip title="Editar" aria-label="editar">
-                                                <IconButton 
-                                                    className={classes.editButton}
-                                                    onClick={() => handleEdit(solicitud._id)}
-                                                >
-                                                <EditIcon color="action" />
-                                                </IconButton>
-                                            </Tooltip>
                                             <Tooltip title="Eliminar" aria-label="eliminar">
                                                 <IconButton 
                                                     className={classes.deleteButton}
