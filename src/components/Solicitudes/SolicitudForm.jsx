@@ -24,7 +24,6 @@ export const SolicitudForm = () => {
     const [cantidad, setCantidad] = useState("");
     const [tipo, setTipo] = useState("");
     const [hospitales, setHospitales] = useState("");
-    const [radio, setRadio] = useState("");
     const [persona, setPersona] = useState("");
 
     useEffect(() => {
@@ -47,7 +46,6 @@ export const SolicitudForm = () => {
             cantidad: cantidad,
             hospital: hospital,
             tipoDeSangre: tipo,
-            radio: radio,
             persona: persona,
             tiempoIncompleta: 10
         }
