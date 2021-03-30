@@ -46,7 +46,7 @@ export const Parametros = () => {
         <Container>
             <Typography variant="h6" gutterBottom>Parámetros de donación</Typography>
             <Grid container spacing={3}>
-                <Grid item xs={12} sm={12}>
+                <Grid item xs={12} sm={12} className="my-4">
                     <FormControl fullWidth>
                             <InputLabel>Hospital</InputLabel>
                             <Select
@@ -100,14 +100,16 @@ export const Parametros = () => {
                         onChange={(event) => setRadio(event.target.value)}
                     />
                 </Grid>
-                <Button
-                    disabled={id === "" ? true : false}
-                    variant="contained"
-                    color="primary"
-                    onClick={handleClick}
-                >
-                    Actualizar
-                </Button>
+                <Grid item xs={12} sm={12} className="mt-5">
+                    <Button
+                        disabled={id === "" ? true : false}
+                        variant="contained"
+                        color="primary"
+                        onClick={handleClick}
+                    >
+                        Actualizar
+                    </Button>
+                </Grid>
             </Grid>
         </Container>
     )

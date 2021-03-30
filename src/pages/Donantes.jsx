@@ -127,14 +127,16 @@ export const Donantes = () => {
                       <TableCell>{donante.fechaDonacion ? fechaDon(donante.fechaDonacion) : "N/A"}</TableCell>
                       <TableCell>{donante.anotadoEnSolicitud ? "Sí" : "No"}</TableCell>
                       <TableCell>
-                          <Tooltip title="Registrar fecha de donación" aria-label="editar">
-                              <IconButton 
-                                  className={classes.editButton}
-                                  onClick={() => handleEdit(donante._id)}
-                              >
-                                <EditIcon color="action" />
-                              </IconButton>
-                          </Tooltip>
+                          {donante.anotadoEnSolicitud ?
+                            <Tooltip title="Registrar fecha de donación" aria-label="editar">
+                                <IconButton 
+                                    className={classes.editButton}
+                                    onClick={() => handleEdit(donante._id)}
+                                >
+                                  <EditIcon color="action" />
+                                </IconButton>
+                            </Tooltip> : null
+                          }
                           <Tooltip title="Banco de sangre" aria-label="banco de sangre">
                               <IconButton 
                                   className={classes.hospitalIcon}
