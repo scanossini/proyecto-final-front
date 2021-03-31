@@ -30,7 +30,7 @@ export function Editar(props) {
     useEffect(() => {
         axios.get('http://localhost:5000/solicitud/' + id)
             .then((response) => {
-                setSolicitud(response.data);
+                setSolicitud(response.data.docs);
                 setHospitalActual(solicitud.hospital);
             })
             .catch((error) => {
@@ -39,7 +39,7 @@ export function Editar(props) {
        
         axios.get('http://localhost:5000/hospital/')
         .then((response) => {
-            setHospitales(response.data);
+            setHospitales(response.data.docs);
         })
         .catch((error) => {
             console.log(error);

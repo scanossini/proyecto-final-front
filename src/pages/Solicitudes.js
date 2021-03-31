@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { Spinner } from '../components/Spinner/Spinner'
 import AddIcon from "@material-ui/icons/Add";
 import FilterListIcon from '@material-ui/icons/FilterList';
+import Pagination from '@material-ui/lab/Pagination';
 import { useHistory } from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -49,11 +50,14 @@ export const Solicitudes = () => {
     const [solicitudes, setSolicitudes] = useState("");
     const [hospitales, setHospitales] = useState("");
     const [tipo, setTipo] = useState("");
+    const [numPaginas, setNumPaginas] = useState(1);
+    const [pagina, setPagina] = useState(1);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/solicitud/')
+        axios.get('http://localhost:5000/solicitud?page=' + pagina)
             .then((response) => {
-                setSolicitudes(response.data);
+                setSolicitudes(response.data.docs);
+                setNumPaginas(response.data.totalPages);
             })
             .catch((error) => {
                 console.log(error);
@@ -61,12 +65,12 @@ export const Solicitudes = () => {
 
         axios.get('http://localhost:5000/hospital/')
             .then((response) => {
-                setHospitales(response.data);
+                setHospitales(response.data.docs);
             })
             .catch((error) => {
                 console.log(error);
             })
-    }, [])
+    }, [pagina, numPaginas])
 
     const handleCreation = () => {
         history.push("/admin/solicitudes/crear")
@@ -84,8 +88,13 @@ export const Solicitudes = () => {
                     .then(res => {
                         setSolicitudes(solicitudes.filter(solicitud2 => solicitud2._id !== solicitud._id))
                         history.push("/admin/solicitudes")
+                       
                     })
                     .catch(err =>console.log(err))
+                    if(solicitudes.length === 1){
+                       setNumPaginas(prevState => ({ numPaginas: prevState.numPaginas - 1}))
+                       handleChange(numPaginas)
+                    }
             }
         })
     }
@@ -128,6 +137,10 @@ export const Solicitudes = () => {
         return filter
     }
 
+    const handleChange = (event, value) => {
+        setPagina(value);
+    }
+
     return (
         <Container>
             { solicitudes && hospitales ? 
@@ -136,7 +149,7 @@ export const Solicitudes = () => {
                         <TableHead>
                             <TableRow className={classes.head}>
                                 <TableCell>Hospital</TableCell>
-                                <TableCell>Persona donada</TableCell>
+                                <TableCell>Paciente</TableCell>
                                 <TableCell>Donaciones</TableCell>
                                 <TableCell>Tipo</TableCell>
                                 <TableCell>Estado</TableCell>
@@ -177,6 +190,7 @@ export const Solicitudes = () => {
             <Fab onClick={handleFilter} className={classes.button2} color="primary" aria-label="add">
                 <FilterListIcon />
             </Fab>
+            <Pagination count={numPaginas} page={pagina} color="primary" onChange={handleChange} /> 
        </Container>
     )
 }

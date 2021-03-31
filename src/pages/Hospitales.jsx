@@ -5,6 +5,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddIcon from "@material-ui/icons/Add";
 import { useHistory } from 'react-router-dom';
+import Pagination from '@material-ui/lab/Pagination';
 import { Spinner } from '../components/Spinner/Spinner'
 import swal from 'sweetalert';
 import Swal from 'sweetalert2';
@@ -42,6 +43,8 @@ export const Hospitales = () => {
     const history = useHistory();
     const [admin, setAdmin] = useState("");
     const [hospitales, setHospitales] = useState("");
+    const [numPaginas, setNumPaginas] = useState(1);
+    const [pagina, setPagina] = useState(1);
 
     useEffect(() => {
         axios.get("http://localhost:5000/admin/info", {"headers": {"token": sessionStorage.getItem("token")}})
@@ -49,12 +52,13 @@ export const Hospitales = () => {
 
         axios.get('http://localhost:5000/hospital/')
             .then((response) => {
-                setHospitales(response.data);
+                setHospitales(response.data.docs);
+                setNumPaginas(response.data.totalPages);
             })
             .catch((error) => {
                 console.log(error);
             })
-    }, [])
+    }, [pagina, numPaginas])
 
     const handleDelete = (id) => {
         Swal.fire({
@@ -72,8 +76,16 @@ export const Hospitales = () => {
                     .catch((err) => {
                         swal(err.response.data, "", "error")
                     })
+                    if(hospitales.length === 1){
+                        setNumPaginas(prevState => ({ numPaginas: prevState.numPaginas - 1}))
+                        handleChange(numPaginas)
+                     }
             }
         })
+    }
+    
+    const handleChange = (event, value) => {
+        setPagina(value);
     }
 
     return(
@@ -89,7 +101,7 @@ export const Hospitales = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {
+                            {                             
                                 hospitales.map((hospital) => (
                                     <TableRow hover>
                                         <TableCell>{hospital.nombre}</TableCell>
@@ -123,6 +135,7 @@ export const Hospitales = () => {
                     <AddIcon />
                 </Fab> : null
             }
+            <Pagination count={numPaginas} page={pagina} color="primary" onChange={handleChange} /> 
        </Container>
     )
 }
