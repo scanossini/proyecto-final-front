@@ -96,10 +96,7 @@ export const Donantes = () => {
                 console.log(error);
             })
   }
-  
-  //TODO - cargar donantes cuando se carga el component
-  //     - buscar con enter? mañana googleo
-  //     - arreglar el serviceworker de mierda
+
   return (
     <Container>
       <SearchBar onInput={(event) => setInput(event.target.value)} onSearch={handleSearch} />
