@@ -9,7 +9,6 @@ import Navbar from '../components/Navbar/NavBar';
 import { SolicitudForm } from '../components/Solicitudes/SolicitudForm';
 import { Hospitales } from '../pages/Hospitales';
 import { HospitalesForm } from '../components/Hospitales/HospitalesForm';
-import { LogOut } from '../components/AuthComponents/LogOut';
 import { BancoDeSangre } from '../components/BancoDeSangre/BancoDeSangre';
 import { Administradores } from '../pages/Administradores';
 
@@ -27,7 +26,6 @@ function AuthRoutes(){
                     <Route exact path='/admin/solicitudes/editar/:id' component={Editar} />
                     <Route exact path='/admin/hospitales/' component={Hospitales} />
                     <Route exact path='/admin/hospitales/crear' component={HospitalesForm} />
-                    <Route exact path='/admin/logout' component={LogOut} />
                     <Route exact path='/admin/admins' component={Administradores} />
                     <Route exact path='/admin/donantes/:id' component={BancoDeSangre} />
             </Switch>

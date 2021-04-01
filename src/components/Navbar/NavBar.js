@@ -5,6 +5,7 @@ import * as AiIcons from "react-icons/ai";
 import { SidebarData } from './SidebarData';
 import './Navbar.css';
 import { IconContext } from 'react-icons';
+import Swal from 'sweetalert2';
 
 function Navbar() {
     const history = useHistory();
@@ -13,8 +14,17 @@ function Navbar() {
     const showSidebar = () => setSidebar(!sidebar)
 
     const logout = () => {
-        sessionStorage.removeItem("token");
-        history.push("/");
+        Swal.fire({
+            title: "Desea cerrar sesión?",
+            showDenyButton: true,
+            denyButtonText: "No",
+            confirmButtonText: "Sí"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                sessionStorage.removeItem("token");
+                history.push("/");
+            }
+        })
     }
 
     return (
