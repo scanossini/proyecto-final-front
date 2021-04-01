@@ -1,14 +1,25 @@
 import { Button, Container, Grid, Typography } from '@material-ui/core';
 import React from 'react'
 import { useHistory } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 export const LogOut = () => {
     const history = useHistory();
 
     const logout = () => {
-        sessionStorage.removeItem("token");
-        history.push("/");
+        Swal.fire({
+            title: "Desea cerrar sesión?",
+            showDenyButton: true,
+            denyButtonText: "No",
+            confirmButtonText: "Sí"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                sessionStorage.removeItem("dtoken");
+                history.push("/");
+            }
+        })
     }
+
 
     return(
         <Container>
