@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import { SidebarData } from './SidebarData';
@@ -7,9 +7,15 @@ import './Navbar.css';
 import { IconContext } from 'react-icons';
 
 function Navbar() {
+    const history = useHistory();
     const [sidebar, setSidebar] = useState(false)
 
     const showSidebar = () => setSidebar(!sidebar)
+
+    const logout = () => {
+        sessionStorage.removeItem("token");
+        history.push("/");
+    }
 
     return (
         <Fragment> 
@@ -38,6 +44,12 @@ function Navbar() {
 
                         )
                     })}
+                    <li className={'nav-text'}>
+                        <Link onClick={() => logout()}>
+                            <AiIcons.AiOutlineLogout />
+                            <span>Cerrar sesión</span>
+                        </Link>
+                    </li>
                 </ul>
             </nav>  
             </IconContext.Provider>

@@ -13,7 +13,7 @@ export const Home = () => {
           
           if (response.data.hospital) 
             axios.get("http://localhost:5000/hospital/"+response.data.hospital)
-              .then(response => setHospital(response.data.docs.nombre))
+              .then(response => setHospital(response.data.nombre))
         })
         
       

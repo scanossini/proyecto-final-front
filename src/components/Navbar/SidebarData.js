@@ -39,11 +39,5 @@ export const SidebarData = [
         path: '/admin/admins',
         icon: <AiIcons.AiFillUnlock/>,
         cName: 'nav-text'
-    },
-    {
-        title: 'Cerrar Sesión',
-        path: '/admin/logout',
-        icon: <AiIcons.AiOutlineLogout />,
-        cName: 'nav-text'
     }
 ] 
