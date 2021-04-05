@@ -21,7 +21,7 @@ export const Home = () => {
 
     return(
         admin ?
-        <Container>
+        <Container className="mt-5">
             <Card>
                 <CardContent>
                     <Typography variant="h4">{(!admin.hospital) ? "Administrador general": "Administrador del hospital "+ hospital}</Typography>

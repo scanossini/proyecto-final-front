@@ -15,7 +15,7 @@ export const Parametros = () => {
     useEffect(() => {
         axios.get('http://localhost:5000/hospital/')
             .then((response) => {
-                setHospitales(response.data);
+                setHospitales(response.data.docs);
             })
             .catch((error) => {
                 console.log(error);

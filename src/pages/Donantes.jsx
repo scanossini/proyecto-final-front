@@ -1,4 +1,4 @@
-import { Container, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@material-ui/core';
+import { Container, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@material-ui/core';
 import axios from 'axios'
 import React, { useState } from 'react'
 import IconButton from '@material-ui/core/IconButton';
@@ -101,6 +101,7 @@ export const Donantes = () => {
     <Container>
       <SearchBar onInput={(event) => setInput(event.target.value)} onSearch={handleSearch} />
       <TableContainer component={Paper} className={classes.container}> 
+      { donantes.length > 0 ? 
         <Table className={classes.table}>
           <TableHead>
             <TableRow className={classes.head}>
@@ -114,7 +115,6 @@ export const Donantes = () => {
           </TableHead>
           <TableBody>
               {
-                donantes.length > 0 ? 
                 donantes.map((donante) => (    
                 <>                        
                   <TableRow hover>
@@ -145,10 +145,11 @@ export const Donantes = () => {
                       </TableCell>
                   </TableRow>
                 </>
-                )) : null
-              }
+                ))}
           </TableBody>
         </Table>
+        : <Typography>{"Busque donantes por su nombre."}</Typography>
+              }
       </TableContainer>
     </Container>
   );

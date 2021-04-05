@@ -135,7 +135,7 @@ export const Hospitales = () => {
                     <AddIcon />
                 </Fab> : null
             }
-            <Pagination count={numPaginas} page={pagina} color="primary" onChange={handleChange} /> 
+            <Pagination className="mt-3" count={numPaginas} page={pagina} color="primary" onChange={handleChange} /> 
        </Container>
     )
 }
