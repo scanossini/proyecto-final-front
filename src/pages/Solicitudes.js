@@ -63,7 +63,7 @@ export const Solicitudes = () => {
                 console.log(error);
             })
 
-        axios.get('http://localhost:5000/hospital/')
+        axios.get('http://localhost:5000/hospital/all')
             .then((response) => {
                 setHospitales(response.data.docs);
             })
