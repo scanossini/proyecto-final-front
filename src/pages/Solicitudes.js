@@ -190,7 +190,7 @@ export const Solicitudes = () => {
             <Fab onClick={handleFilter} className={classes.button2} color="primary" aria-label="add">
                 <FilterListIcon />
             </Fab>
-            <Pagination count={numPaginas} page={pagina} color="primary" onChange={handleChange} /> 
+            <Pagination className="mt-3" count={numPaginas} page={pagina} color="primary" onChange={handleChange} /> 
        </Container>
     )
 }
