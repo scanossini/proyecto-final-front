@@ -2,10 +2,12 @@ import { Button, Container, FormControl, Grid, InputLabel, MenuItem, Select, Typ
 import axios from 'axios';
 import { useSnackbar } from 'notistack';
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
 
 export const BancoDeSangre = (props) =>{
     const id = props.location.pathname.split("/")[3];
     const [banco, setBanco] = useState([]);
+    const [hospital, setHospital] = useState("");
     const [vih, setVih] = useState(false);
     const [sifilis, setSifilis] = useState(false);
     const [hepatitisB, setHepatitisB] = useState(false);
@@ -13,9 +15,21 @@ export const BancoDeSangre = (props) =>{
     const [htlv, setHtlv] = useState(false);
     const [chagas, setChagas] = useState(false);
     const [brucelosis, setBrucelosis] = useState(false);
+    const [hospitales, setHospitales] = useState("");
+    const [actualizado, setActualizado] = useState(true);
+    const [fechaDeActualizacion, setFechaDeActualizacion] = useState("");
     const { enqueueSnackbar } = useSnackbar();
+    const history = useHistory()
 
     useEffect(() => {
+        axios.get('http://localhost:5000/hospital/')
+            .then((response) => {
+                setHospitales(response.data.docs);
+            })
+            .catch((error) => {
+                console.log(error);
+        })
+
         axios.get('http://localhost:5000/banco/'+id)
             .then(response => {
                 if (!response.data){
@@ -25,14 +39,16 @@ export const BancoDeSangre = (props) =>{
                     axios.post('http://localhost:5000/banco/', data)
                         .then(response => setBanco(response.data))
                 } else {
-                    setBanco(response.data)
-                    setVih(response.data.vih)
-                    setSifilis(response.data.sifilis)
-                    setHepatitisB(response.data.hepatitisB)
-                    setHepatitisC(response.data.hepatitisC)
-                    setHtlv(response.data.htlv)
-                    setChagas(response.data.chagas)
-                    setBrucelosis(response.data.brucelosis)
+                    setBanco(response.data.banco)
+                    setVih(response.data.banco.vih)
+                    setSifilis(response.data.banco.sifilis)
+                    setHepatitisB(response.data.banco.hepatitisB)
+                    setHepatitisC(response.data.banco.hepatitisC)
+                    setHtlv(response.data.banco.htlv)
+                    setChagas(response.data.banco.chagas)
+                    setBrucelosis(response.data.banco.brucelosis)
+                    setActualizado(response.data.actualizado)
+                    setFechaDeActualizacion(response.data.banco.fechaDeActualizacion)
                 }
             })
     }, [id])
@@ -45,7 +61,8 @@ export const BancoDeSangre = (props) =>{
             hepatitisC: hepatitisC,
             htlv: htlv,
             chagas: chagas,
-            brucelosis: brucelosis
+            brucelosis: brucelosis,
+            hospital: hospital
         }
         
         axios.put('http://localhost:5000/banco/'+banco._id, data)
@@ -53,10 +70,18 @@ export const BancoDeSangre = (props) =>{
             .catch(err => console.log(err))
     }
     
+    const fechaParser = (fecha) => {
+        var date = new Date(fecha)
+        return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear()
+    }
+
     return (
         <Container>
             <Typography variant="h6" gutterBottom>
-                Banco de sangre
+                {"Banco de sangre" + ((actualizado ? "" : " (desactualizado)"))}
+            </Typography>
+            <Typography variant="subtitle1" gutterBottom>
+                {"Fecha de actualización: "+((fechaDeActualizacion) ? fechaParser(fechaDeActualizacion) : "N/A")}
             </Typography>
             <Grid container spacing={3}>
                 <Grid item xs={12} sm={4}>
@@ -157,13 +182,37 @@ export const BancoDeSangre = (props) =>{
                         </Select>
                     </FormControl>
                 </Grid>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleClick}
-                >
-                    Actualizar
-                </Button>
+                <Grid item xs={12} sm={8}>
+                    <FormControl fullWidth>
+                        <InputLabel>Hospital</InputLabel>
+                        <Select
+                            id="hospital"
+                            name="hospital"
+                            value={hospital}
+                            onChange={(event) => setHospital(event.target.value)}   
+                        >
+                            {hospitales ? hospitales.map((hospital) => (
+                                <MenuItem value={hospital._id}>{hospital.nombre}</MenuItem>
+                            )) : null}
+                        </Select>
+                    </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                    <Button
+                        className="mr-3"
+                        color="secondary"
+                        onClick={() => history.push("/admin/donantes")}
+                    >
+                        Cancelar
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleClick}
+                    >
+                        Actualizar
+                    </Button>
+                </Grid>
             </Grid>
         </Container>
     )
