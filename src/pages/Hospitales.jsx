@@ -1,7 +1,6 @@
 import { Paper, makeStyles, Container, Fab, Table, TableCell, TableHead, Tooltip, TableContainer, TableBody, TableRow, IconButton } from '@material-ui/core';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddIcon from "@material-ui/icons/Add";
 import { useHistory } from 'react-router-dom';
@@ -97,7 +96,7 @@ export const Hospitales = () => {
                             <TableRow className={classes.head}>
                                 <TableCell>Hospital</TableCell>
                                 <TableCell>Localización</TableCell>
-                                <TableCell>Operación</TableCell>
+                                <TableCell>Eliminar</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -107,12 +106,6 @@ export const Hospitales = () => {
                                         <TableCell>{hospital.nombre}</TableCell>
                                         <TableCell>{hospital.direccion + ", " + hospital.ciudad}</TableCell>
                                         <TableCell>
-                                            <Tooltip title="Editar" aria-label="editar">
-                                                <IconButton
-                                                    className={classes.editButton} >
-                                                <EditIcon color="action" />
-                                                </IconButton>
-                                            </Tooltip>
                                             <Tooltip title="Eliminar" aria-label="eliminar">
                                                 <IconButton
                                                    className={classes.deleteButton}
