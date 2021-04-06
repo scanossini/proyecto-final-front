@@ -27,9 +27,9 @@ export const SolicitudForm = () => {
     const [persona, setPersona] = useState("");
 
     useEffect(() => {
-        axios.get('http://localhost:5000/hospital/')
+        axios.get('http://localhost:5000/hospital/all')
             .then((response) => {
-                setHospitales(response.data.docs);
+                setHospitales(response.data);
             })
             .catch((error) => {
                 console.log(error);

@@ -19,9 +19,9 @@ export const Administradores = () => {
         axios.get("http://localhost:5000/admin/info", {"headers": {"token": sessionStorage.getItem("token")}})
             .then(res => setAdmin(res.data))
         
-        axios.get('http://localhost:5000/hospital/')
+        axios.get('http://localhost:5000/hospital/all')
             .then((response) => {
-                setHospitales(response.data.docs);
+                setHospitales(response.data);
             })
             .catch((error) => {
                 console.log(error);
@@ -88,9 +88,9 @@ export const Administradores = () => {
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 required
-                                id="nombre"
-                                name="nombre"
-                                label="Nombre del administrador"
+                                id="nick"
+                                name="nick"
+                                label="Nick del administrador"
                                 fullWidth
                                 onChange={(event) => setNombre(event.target.value)}
                             />
