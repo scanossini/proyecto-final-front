@@ -1,10 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Button, Container, FormControl, Grid, IconButton, InputLabel, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Tooltip, Typography } from '@material-ui/core'
+import { Button, Card, CardContent, Container, FormControl, Grid, IconButton, InputLabel, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Tooltip, Typography } from '@material-ui/core'
 import { useSnackbar } from 'notistack';
 import DeleteIcon from '@material-ui/icons/Delete';
 import swal from 'sweetalert';
 import { Spinner } from '../components/Spinner/Spinner';
+import { NoPermission } from '../components/NoPermission/NoPermission';
 
 export const Administradores = () => {
     const [admin, setAdmin] = useState("");
@@ -147,7 +148,7 @@ export const Administradores = () => {
                         </Table>
                     </TableContainer>
                 </Container>
-            : <h1>Esto solo puede ser accedido por el administrador general</h1>
+            : <NoPermission />            
         : <Spinner />
     )
 

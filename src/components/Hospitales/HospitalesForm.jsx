@@ -1,10 +1,11 @@
-import { Button, Container, Grid, TextField, Typography } from '@material-ui/core'
+import { Button, Container, Grid, TextField, Card, Typography, CardContent } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import swal from 'sweetalert'
 import Map from '../Map/Map'
+import { NoPermission } from '../NoPermission/NoPermission'
 
 const useStyles = makeStyles((theme) => ({
     buttons: {
@@ -144,7 +145,7 @@ export const HospitalesForm = () => {
                             Crear
                         </Button>
                     </div>
-                </Container> : <h1>Esto solo puede ser accedido por el administrador general</h1>
+                </Container> : <NoPermission/>
         : null
     )
 } 
