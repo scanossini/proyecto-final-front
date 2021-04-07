@@ -3,11 +3,19 @@ import { Link, useHistory } from 'react-router-dom';
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import { SidebarData } from './SidebarData';
+import { makeStyles } from '@material-ui/core/styles';
 import './Navbar.css';
 import { IconContext } from 'react-icons';
 import Swal from 'sweetalert2';
 
+const useStyles = makeStyles((theme) => ({
+    item: {
+      marginLeft: theme.spacing(2),
+    },
+  }));
+
 function Navbar() {
+    const classes = useStyles();
     const history = useHistory();
     const [sidebar, setSidebar] = useState(false)
 
@@ -48,7 +56,7 @@ function Navbar() {
                             <li key={index} className={item.cName}>
                                 <Link to={item.path}>
                                     {item.icon}
-                                    <span>{item.title}</span>
+                                    <span className={classes.item}>{item.title}</span>
                                 </Link>
                             </li>
 
@@ -57,7 +65,7 @@ function Navbar() {
                     <li className={'nav-text'}>
                         <Link to={"#"} onClick={() => logout()}>
                             <AiIcons.AiOutlineLogout />
-                            <span>Cerrar sesión</span>
+                            <span className={classes.item}>Cerrar sesión</span>
                         </Link>
                     </li>
                 </ul>
