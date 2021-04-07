@@ -98,6 +98,7 @@ export const Administradores = () => {
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 required
+                                type="password"
                                 id="contraseña"
                                 name="contraseña"
                                 label="Contraseña del administrador"
