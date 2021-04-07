@@ -49,8 +49,10 @@ export const Administradores = () => {
     }
     
     const nombreHospital = (id) => {
+        if (hospitales.length > 0) {
             const hospital = hospitales.filter(hospital => hospital._id === id)
             return hospital[0].nombre
+        } else return "Cargando..."
     }
 
     const handleDelete = (id) => {

@@ -92,8 +92,9 @@ export const Solicitudes = () => {
                     })
                     .catch(err =>console.log(err))
                     if(solicitudes.length === 1){
-                       setNumPaginas(prevState => ({ numPaginas: prevState.numPaginas - 1}))
-                       handleChange(numPaginas)
+                        setTipo("")
+                        setNumPaginas(prevState => ({ numPaginas: prevState.numPaginas - 1}))
+                        handleChange(numPaginas)
                     }
             }
         })
@@ -145,7 +146,7 @@ export const Solicitudes = () => {
         <Container>
             { solicitudes && hospitales ? 
                 <TableContainer component={Paper} className={classes.container}> 
-                    <Table className={classes.table}>
+                    <Table className={classes.table} size="small">
                         <TableHead>
                             <TableRow className={classes.head}>
                                 <TableCell>Hospital</TableCell>

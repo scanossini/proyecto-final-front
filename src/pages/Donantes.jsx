@@ -9,7 +9,7 @@ import { useHistory } from 'react-router-dom';
 import swal from '@sweetalert/with-react';
 import { SearchBar } from '../components/SearchBar/SearchBar'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   table: {
       minWidth: 650
   },
@@ -33,8 +33,12 @@ const useStyles = makeStyles({
       backgroundColor: "rgb(230,230,230)",
       fontSize: 15,
       marginLeft: 5, 
+  },
+  msg: {
+    position: "absolute", 
+    top: "50%"
   }
-})
+}))
 
 export const Donantes = () => {
   const [donantes, setDonantes] = useState([])
@@ -84,6 +88,8 @@ export const Donantes = () => {
   }
 
   const handleSearch = () => {
+    if (input === "") return;
+
     var data = {
       nombre: input
     }
@@ -100,8 +106,8 @@ export const Donantes = () => {
   return (
     <Container>
       <SearchBar onInput={(event) => setInput(event.target.value)} onSearch={handleSearch} />
-      <TableContainer component={Paper} className={classes.container}> 
       { donantes.length > 0 ? 
+      <TableContainer component={Paper} className={classes.container}> 
         <Table className={classes.table}>
           <TableHead>
             <TableRow className={classes.head}>
@@ -148,9 +154,12 @@ export const Donantes = () => {
                 ))}
           </TableBody>
         </Table>
-        : <Typography>{"Busque donantes por su nombre."}</Typography>
-              }
-      </TableContainer>
+        </TableContainer>
+        : 
+        <div className={classes.msg}>
+            <Typography variant="h4">{"Busque donantes por su nombre."}</Typography>
+        </div>
+      }
     </Container>
   );
 }
