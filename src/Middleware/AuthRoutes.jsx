@@ -9,7 +9,7 @@ import Navbar from '../components/Navbar/NavBar';
 import { SolicitudForm } from '../components/Solicitudes/SolicitudForm';
 import { Hospitales } from '../pages/Hospitales';
 import { HospitalesForm } from '../components/Hospitales/HospitalesForm';
-import { BancoDeSangre } from '../components/BancoDeSangre/BancoDeSangre';
+import { BancoDeSangre } from '../components/BancoDeSangre/bancoDeSangre';
 import { Administradores } from '../pages/Administradores';
 
 function AuthRoutes(){

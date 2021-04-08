@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useSnackbar } from 'notistack';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
+import swal from 'sweetalert';
 
 export const BancoDeSangre = (props) =>{
     const id = props.location.pathname.split("/")[3];
@@ -65,10 +66,11 @@ export const BancoDeSangre = (props) =>{
             brucelosis: brucelosis,
             hospital: hospital
         }
+        console.log(hospital)
         
         axios.put('http://localhost:5000/banco/'+banco._id, data)
             .then(res => enqueueSnackbar("Datos actualizados", {variant: "success"}))
-            .catch(err => console.log(err))
+            .catch(err => swal(err.response.data, "", "error"))
     }
     
     const fechaParser = (fecha) => {

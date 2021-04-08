@@ -92,7 +92,6 @@ export const Solicitudes = () => {
                     })
                     .catch(err =>console.log(err))
                     if(solicitudes.length === 1){
-                        setTipo("")
                         setNumPaginas(prevState => ({ numPaginas: prevState.numPaginas - 1}))
                         handleChange(numPaginas)
                     }
@@ -140,6 +139,7 @@ export const Solicitudes = () => {
 
     const handleChange = (event, value) => {
         setPagina(value);
+        setTipo("");
     }
 
     return (
@@ -188,7 +188,7 @@ export const Solicitudes = () => {
             <Fab onClick={handleCreation} className={classes.button} color="primary" aria-label="add">
                 <AddIcon />
             </Fab>
-            <Fab onClick={handleFilter} className={classes.button2} color="primary" aria-label="add">
+            <Fab onClick={handleFilter} className={classes.button2} color="primary" aria-label="filter">
                 <FilterListIcon />
             </Fab>
             <Pagination className="mt-3" count={numPaginas} page={pagina} color="primary" onChange={handleChange} /> 
