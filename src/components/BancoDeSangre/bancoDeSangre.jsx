@@ -205,7 +205,7 @@ export const BancoDeSangre = (props) =>{
                     >
                         Cancelar
                     </Button>
-                    <Button
+                    <Button disabled={(hospital === "" ? true: false)}
                         variant="contained"
                         color="primary"
                         onClick={handleClick}
