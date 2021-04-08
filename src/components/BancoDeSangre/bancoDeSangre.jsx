@@ -40,15 +40,17 @@ export const BancoDeSangre = (props) =>{
                         .then(response => setBanco(response.data))
                 } else {
                     setBanco(response.data.banco)
-                    setVih(response.data.banco.vih)
-                    setSifilis(response.data.banco.sifilis)
-                    setHepatitisB(response.data.banco.hepatitisB)
-                    setHepatitisC(response.data.banco.hepatitisC)
-                    setHtlv(response.data.banco.htlv)
-                    setChagas(response.data.banco.chagas)
-                    setBrucelosis(response.data.banco.brucelosis)
-                    setActualizado(response.data.actualizado)
-                    setFechaDeActualizacion(response.data.banco.fechaDeActualizacion)
+                    if(response.data.banco){
+                        setVih(response.data.banco.vih)
+                        setSifilis(response.data.banco.sifilis)
+                        setHepatitisB(response.data.banco.hepatitisB)
+                        setHepatitisC(response.data.banco.hepatitisC)
+                        setHtlv(response.data.banco.htlv)
+                        setChagas(response.data.banco.chagas)
+                        setBrucelosis(response.data.banco.brucelosis)
+                        setActualizado(response.data.actualizado)
+                        setFechaDeActualizacion(response.data.banco.fechaDeActualizacion)
+                    }
                 }
             })
     }, [id])
