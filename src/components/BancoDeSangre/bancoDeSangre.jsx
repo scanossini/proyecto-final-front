@@ -49,6 +49,7 @@ export const BancoDeSangre = (props) =>{
                     setBrucelosis(response.data.banco.brucelosis)
                     setActualizado(response.data.actualizado)
                     setFechaDeActualizacion(response.data.banco.fechaDeActualizacion)
+                    setHospital(response.data.banco.hospital)
                 }
             })
     }, [id])
