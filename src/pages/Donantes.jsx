@@ -1,6 +1,7 @@
 import { Container, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@material-ui/core';
 import axios from 'axios'
 import React, { useState } from 'react'
+import InfoIcon from '@material-ui/icons/Info';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import Tooltip from '@material-ui/core/tooltip';
@@ -103,12 +104,34 @@ export const Donantes = () => {
             })
   }
 
+  const moreInfo = (donante) => {
+    swal(
+      <div>
+        <Typography variant="h4">{donante.nombre+" "+donante.apellido}</Typography>
+        <div>
+          <Typography variant="h6">{"Tipo de sangre: " + donante.tipoDeSangre}</Typography>
+          <Typography variant="h6">{"DNI: " + donante.dni}</Typography>
+          <Typography variant="h6">{"Fecha de nacimiento: " + fechaDon(donante.fechaNac)}</Typography>
+          <Typography variant="h6">{"Domicilio: " + donante.domicilio}</Typography>
+          <Typography variant="h6">{"Localidad: " + donante.localidad}</Typography>
+          <Typography variant="h6">{"Domicilio del DNI: " + donante.domicilioDNI}</Typography>
+          <Typography variant="h6">{"Localidad del DNI: " + donante.localidadDNI}</Typography>
+          <Typography variant="h6">{"Teléfono: " + donante.telefono}</Typography>
+          <Typography variant="h6">{"Código postal: " + donante.codPostal}</Typography>
+          <Typography variant="h6">{"Mail: " + donante.mail}</Typography>
+          <Typography variant="h6">{"Lugar de nacimiento: " + donante.lugarNac}</Typography>
+          <Typography variant="h6">{"Ocupación: " + donante.ocupacion}</Typography>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <Container>
       <SearchBar onInput={(event) => setInput(event.target.value)} onSearch={handleSearch} />
       { donantes.length > 0 ? 
       <TableContainer component={Paper} className={classes.container}> 
-        <Table className={classes.table}>
+        <Table className={classes.table} size="small">
           <TableHead>
             <TableRow className={classes.head}>
               <TableCell>Nombre</TableCell>
@@ -130,6 +153,14 @@ export const Donantes = () => {
                       <TableCell>{donante.fechaDonacion ? fechaDon(donante.fechaDonacion) : "N/A"}</TableCell>
                       <TableCell>{donante.anotadoEnSolicitud ? "Sí" : "No"}</TableCell>
                       <TableCell>
+                        <Tooltip title="Más información" aria-label="mas info">
+                            <IconButton 
+                                className={classes.hospitalIcon}
+                                onClick={() => moreInfo(donante)}
+                            >
+                              <InfoIcon />
+                            </IconButton>
+                        </Tooltip>
                         <Tooltip title="Banco de sangre" aria-label="banco de sangre">
                             <IconButton 
                                 className={classes.hospitalIcon}
