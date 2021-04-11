@@ -38,13 +38,13 @@ function Navbar() {
     return (
         <Fragment> 
             <IconContext.Provider value={{color: '#fff'} }>
-            <div className="navbar">
+            <div className="navbar sticky-top">
                 <Link to="#" className="menu-bars">
                     <FaIcons.FaBars onClick={showSidebar} />
                 </Link>
                 <h1 className="title pl-2 ml-auto">Banco de sangre</h1>
             </div>
-            <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
+            <nav className={sidebar ? 'nav-menu active position-fixed' : 'nav-menu position-fixed'}>
                 <ul className='nav-menu-items' onClick={showSidebar}>
                     <li className="navbar-toggle">
                         <Link to="#" className='menu-bars'>
