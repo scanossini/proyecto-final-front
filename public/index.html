@@ -8,7 +8,7 @@
     <meta name="theme-color" content="#000000" />
     <meta name="description" content="PWA para la gestión de un banco de sangre" />
     <link rel="apple-touch-icon" href="./images/logo.png" />
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
 
     <title>Banco de Sangre</title>
 
@@ -17,15 +17,6 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <script>
-       if('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./serviceworker.js')
-                    .then((reg) => console.log('Success: ', reg.scope))
-                    .catch((err) => console.log('Failure: ', err));
-            })
-        }
-    </script>
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.6.0/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

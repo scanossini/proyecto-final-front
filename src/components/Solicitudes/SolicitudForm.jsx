@@ -73,7 +73,7 @@ export const SolicitudForm = () => {
                             onChange={(event) => setHospital(event.target.value)}   
                         >
                             {hospitales ? hospitales.map((hospital) => (
-                                <MenuItem value={hospital._id}>{hospital.nombre}</MenuItem>
+                                <MenuItem key={hospital._id} value={hospital._id}>{hospital.nombre}</MenuItem>
                             )) : null}
                         </Select>
                     </FormControl>

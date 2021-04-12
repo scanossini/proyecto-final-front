@@ -159,9 +159,8 @@ export const Solicitudes = () => {
                         </TableHead>
                         <TableBody>
                             {
-                                filterList().map((solicitud) => (    
-                                <>                        
-                                    <TableRow hover>
+                                filterList().map((solicitud) => (                    
+                                    <TableRow hover key={solicitud._id}>
                                         <TableCell>{nombreHospital(solicitud.hospital)}</TableCell>
                                         <TableCell>{solicitud.persona}</TableCell>
                                         <TableCell>{solicitud.donantes+"/"+solicitud.cantidad}</TableCell>
@@ -178,7 +177,6 @@ export const Solicitudes = () => {
                                             </Tooltip>
                                         </TableCell>
                                     </TableRow>
-                                </>
                                 ))
                             }
                         </TableBody>

@@ -144,9 +144,8 @@ export const Donantes = () => {
           </TableHead>
           <TableBody>
               {
-                donantes.map((donante) => (    
-                <>                        
-                  <TableRow hover>
+                donantes.map((donante) => (                          
+                  <TableRow key={donante._id} hover>
                       <TableCell>{donante.nombre}</TableCell>
                       <TableCell>{donante.apellido}</TableCell>
                       <TableCell>{donante.dni}</TableCell>
@@ -181,7 +180,6 @@ export const Donantes = () => {
                         }
                       </TableCell>
                   </TableRow>
-                </>
                 ))}
           </TableBody>
         </Table>
