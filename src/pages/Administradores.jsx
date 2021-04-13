@@ -119,8 +119,8 @@ export const Administradores = () => {
                             </Button>
                         </Grid>
                     </Grid>
-                    <TableContainer component={Paper} className="mt-5">
-                        <Table>
+                    {admins.length > 0 ? <TableContainer component={Paper} className="mt-5">
+                        <Table size="small">
                             <TableHead>
                                 <TableRow>
                                     <TableCell>Administrador</TableCell>
@@ -146,7 +146,7 @@ export const Administradores = () => {
                                 }
                             </TableBody>
                         </Table>
-                    </TableContainer>
+                    </TableContainer> : null}
                 </Container>
             : <NoPermission />            
         : <Spinner />
