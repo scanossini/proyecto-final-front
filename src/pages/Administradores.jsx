@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Container, FormControl, Grid, IconButton, InputLabel, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Tooltip, Typography } from '@material-ui/core'
 import { useSnackbar } from 'notistack';
 import DeleteIcon from '@material-ui/icons/Delete';
+import Pagination from '@material-ui/lab/Pagination';
 import swal from 'sweetalert';
 import { Spinner } from '../components/Spinner/Spinner';
 import { NoPermission } from '../components/NoPermission/NoPermission';
@@ -14,6 +15,8 @@ export const Administradores = () => {
     const [hospital, setHospital] = useState("");
     const [nombre, setNombre] = useState("");
     const [password, setPassword] = useState("");
+    const [numPaginas, setNumPaginas] = useState(1);
+    const [pagina, setPagina] = useState(1);
     const { enqueueSnackbar } = useSnackbar();
 
     useEffect(() => {
@@ -28,9 +31,12 @@ export const Administradores = () => {
                 console.log(error);
         })
 
-        axios.get('http://localhost:5000/admin')
-            .then((response) => setAdmins(response.data))
-    }, [])
+        axios.get('http://localhost:5000/admin?page=' + pagina)
+        .then((response) => {
+            setAdmins(response.data.docs);
+            setNumPaginas(response.data.totalPages);
+        })
+    }, [pagina, numPaginas])
 
     const handleCreate = () => {
         var data = {
@@ -64,6 +70,11 @@ export const Administradores = () => {
             })
             .catch(err => swal(err.response.data, "", "error"))
     }
+
+    const handleChange = (event, value) => {
+        setPagina(value);
+    }
+
 
     return (
         admin ? 
@@ -147,9 +158,11 @@ export const Administradores = () => {
                             </TableBody>
                         </Table>
                     </TableContainer> : null}
+                    <Pagination className="mt-3" count={numPaginas} page={pagina} color="primary" onChange={handleChange} /> 
                 </Container>
             : <NoPermission />            
         : <Spinner />
+        
     )
 
 }
