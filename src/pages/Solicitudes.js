@@ -54,7 +54,7 @@ export const Solicitudes = () => {
     const [pagina, setPagina] = useState(1);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/solicitud?page=' + pagina)
+        axios.get('http://localhost:5000/solicitud?tipo=' + tipo + '&page=' + pagina)
             .then((response) => {
                 setSolicitudes(response.data.docs);
                 setNumPaginas(response.data.totalPages);
@@ -70,7 +70,7 @@ export const Solicitudes = () => {
             .catch((error) => {
                 console.log(error);
             })
-    }, [pagina, numPaginas])
+    }, [pagina, numPaginas, tipo])
 
     const handleCreation = () => {
         history.push("/admin/solicitudes/crear")
@@ -124,22 +124,14 @@ export const Solicitudes = () => {
             inputPlaceholder: 'Seleccione un tipo de sangre',
             showCancelButton: true,
             inputValidator: (value) => {
+                setPagina(1);
                 setTipo(value);
             }
         })
     }
 
-    const filterList = () => {
-        var filter;
-        tipo !== "" ? 
-            filter = solicitudes.filter(solicitud => solicitud.tipoDeSangre === tipo) 
-            : filter = solicitudes
-        return filter
-    }
-
     const handleChange = (event, value) => {
         setPagina(value);
-        setTipo("");
     }
 
     return (
@@ -159,7 +151,7 @@ export const Solicitudes = () => {
                         </TableHead>
                         <TableBody>
                             {
-                                filterList().map((solicitud) => (                    
+                                solicitudes.map((solicitud) => (                    
                                     <TableRow hover key={solicitud._id}>
                                         <TableCell>{nombreHospital(solicitud.hospital)}</TableCell>
                                         <TableCell>{solicitud.persona}</TableCell>
