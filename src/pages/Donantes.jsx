@@ -36,8 +36,8 @@ const useStyles = makeStyles(theme => ({
       marginLeft: 5, 
   },
   msg: {
-    position: "absolute", 
-    top: "50%"
+    margin: "auto",
+    width: "50%"
   }
 }))
 
@@ -185,7 +185,7 @@ export const Donantes = () => {
         </Table>
         </TableContainer>
         : 
-        <div className={classes.msg}>
+        <div className={classes.msg + " mt-5"}>
             <Typography variant="h4">{"Busque donantes por su nombre."}</Typography>
         </div>
       }
