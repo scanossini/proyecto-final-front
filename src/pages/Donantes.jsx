@@ -9,6 +9,8 @@ import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 import { useHistory } from 'react-router-dom';
 import swal from '@sweetalert/with-react';
 import { SearchBar } from '../components/SearchBar/SearchBar'
+import { DonantesInfo } from '../components/Donantes/DonantesInfo';
+import { DateParser } from '../components/Utils/DateParser';
 
 const useStyles = makeStyles(theme => ({
   table: {
@@ -83,11 +85,6 @@ export const Donantes = () => {
     })
   }
 
-  const fechaDon = (fecha) => {
-    var date = new Date(fecha)
-    return (date.getDate()+1)+"/"+(date.getMonth()+1)+"/"+date.getFullYear()
-  }
-
   const handleSearch = () => {
     if (input === "") return;
 
@@ -106,23 +103,7 @@ export const Donantes = () => {
 
   const moreInfo = (donante) => {
     swal(
-      <div>
-        <Typography variant="h4">{donante.nombre+" "+donante.apellido}</Typography>
-        <div>
-          <Typography variant="h6">{"Tipo de sangre: " + donante.tipoDeSangre}</Typography>
-          <Typography variant="h6">{"DNI: " + donante.dni}</Typography>
-          <Typography variant="h6">{"Fecha de nacimiento: " + fechaDon(donante.fechaNac)}</Typography>
-          <Typography variant="h6">{"Domicilio: " + donante.domicilio}</Typography>
-          <Typography variant="h6">{"Localidad: " + donante.localidad}</Typography>
-          <Typography variant="h6">{"Domicilio del DNI: " + donante.domicilioDNI}</Typography>
-          <Typography variant="h6">{"Localidad del DNI: " + donante.localidadDNI}</Typography>
-          <Typography variant="h6">{"Teléfono: " + donante.telefono}</Typography>
-          <Typography variant="h6">{"Código postal: " + donante.codPostal}</Typography>
-          <Typography variant="h6">{"Mail: " + donante.mail}</Typography>
-          <Typography variant="h6">{"Lugar de nacimiento: " + donante.lugarNac}</Typography>
-          <Typography variant="h6">{"Ocupación: " + donante.ocupacion}</Typography>
-        </div>
-      </div>
+      <DonantesInfo donante={donante} />
     )
   }
 
@@ -149,7 +130,7 @@ export const Donantes = () => {
                       <TableCell>{donante.nombre}</TableCell>
                       <TableCell>{donante.apellido}</TableCell>
                       <TableCell>{donante.dni}</TableCell>
-                      <TableCell>{donante.fechaDonacion ? fechaDon(donante.fechaDonacion) : "N/A"}</TableCell>
+                      <TableCell>{donante.fechaDonacion ? DateParser(donante.fechaDonacion) : "N/A"}</TableCell>
                       <TableCell>{donante.anotadoEnSolicitud ? "Sí" : "No"}</TableCell>
                       <TableCell>
                         <Tooltip title="Más información" aria-label="mas info">
@@ -192,4 +173,3 @@ export const Donantes = () => {
     </Container>
   );
 }
-

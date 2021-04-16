@@ -7,6 +7,7 @@ import Pagination from '@material-ui/lab/Pagination';
 import swal from 'sweetalert';
 import { Spinner } from '../components/Spinner/Spinner';
 import { NoPermission } from '../components/NoPermission/NoPermission';
+import Swal from 'sweetalert2';
 
 export const Administradores = () => {
     const [admin, setAdmin] = useState("");
@@ -63,12 +64,21 @@ export const Administradores = () => {
     }
 
     const handleDelete = (id) => {
-        axios.delete("http://localhost:5000/admin/" + id, {"headers": {"token": sessionStorage.getItem("token")}})
-            .then(res => { 
-                setAdmins(admins.filter(admin => admin._id !== id))
-                enqueueSnackbar("Administrador eliminado", {variant: "success"}) 
-            })
-            .catch(err => swal(err.response.data, "", "error"))
+        Swal.fire({
+            title: "Desea eliminar al administrador?",
+            showDenyButton: true,
+            denyButtonText: "No, cancelar",
+            confirmButtonText: "Sí, deseo eliminar"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete("http://localhost:5000/admin/" + id, {"headers": {"token": sessionStorage.getItem("token")}})
+                    .then(res => { 
+                        setAdmins(admins.filter(admin => admin._id !== id))
+                        enqueueSnackbar("Administrador eliminado", {variant: "success"}) 
+                    })
+                    .catch(err => swal(err.response.data, "", "error"))
+            }
+        })
     }
 
     const handleChange = (event, value) => {
@@ -130,10 +140,12 @@ export const Administradores = () => {
                             </Button>
                         </Grid>
                     </Grid>
-                    {admins.length > 0 ? <TableContainer component={Paper} className="mt-5">
+                    {admins.length > 0 ? 
+                    <>
+                    <TableContainer component={Paper} className="mt-5">
                         <Table size="small">
                             <TableHead>
-                                <TableRow>
+                                <TableRow style={{backgroundColor: "lightblue"}}>
                                     <TableCell>Administrador</TableCell>
                                     <TableCell>Hospital</TableCell>
                                     <TableCell>Eliminar</TableCell>
@@ -157,8 +169,8 @@ export const Administradores = () => {
                                 }
                             </TableBody>
                         </Table>
-                    </TableContainer> : null}
-                    <Pagination className="mt-3" count={numPaginas} page={pagina} color="primary" onChange={handleChange} /> 
+                    </TableContainer>
+                    <Pagination className="mt-3" count={numPaginas} page={pagina} color="primary" onChange={handleChange} /> </>  : null}
                 </Container>
             : <NoPermission />            
         : <Spinner />

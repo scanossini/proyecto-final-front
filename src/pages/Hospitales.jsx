@@ -49,7 +49,7 @@ export const Hospitales = () => {
         axios.get("http://localhost:5000/admin/info", {"headers": {"token": sessionStorage.getItem("token")}})
             .then(res => setAdmin(res.data))
 
-        axios.get('http://localhost:5000/hospital/')
+        axios.get('http://localhost:5000/hospital?page=' + pagina)
             .then((response) => {
                 setHospitales(response.data.docs);
                 setNumPaginas(response.data.totalPages);
