@@ -1,4 +1,5 @@
 export const DateParser = (fecha) => {
     var date = new Date(fecha)
-    return (date.getDate()+1)+"/"+(date.getMonth()+1)+"/"+date.getFullYear()
+    var correctDate = new Date( date.getTime() + Math.abs(date.getTimezoneOffset()*60000) )
+    return (correctDate.getDate())+"/"+(correctDate.getMonth()+1)+"/"+correctDate.getFullYear()
 }
