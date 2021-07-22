@@ -143,6 +143,7 @@ export const Solicitudes = () => {
                             <TableRow className={classes.head}>
                                 <TableCell>Hospital</TableCell>
                                 <TableCell>Paciente</TableCell>
+                                <TableCell>DNI</TableCell>
                                 <TableCell>Donaciones</TableCell>
                                 <TableCell>Tipo</TableCell>
                                 <TableCell>Estado</TableCell>
@@ -155,6 +156,7 @@ export const Solicitudes = () => {
                                     <TableRow hover key={solicitud._id}>
                                         <TableCell>{nombreHospital(solicitud.hospital)}</TableCell>
                                         <TableCell>{solicitud.persona}</TableCell>
+                                        <TableCell>{solicitud.DNIPersona}</TableCell>
                                         <TableCell>{solicitud.donantes+"/"+solicitud.cantidad}</TableCell>
                                         <TableCell>{solicitud.tipoDeSangre}</TableCell>
                                         <TableCell>{solicitud.estado}</TableCell>
