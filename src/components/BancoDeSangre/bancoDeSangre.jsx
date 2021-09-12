@@ -66,10 +66,13 @@ export const BancoDeSangre = (props) =>{
             brucelosis: brucelosis,
             hospital: hospital
         }
-        console.log(hospital)
         
         axios.put('http://localhost:5000/banco/'+banco._id, data)
-            .then(res => enqueueSnackbar("Datos actualizados", {variant: "success"}))
+            .then(res => {
+                setFechaDeActualizacion(res.data.fechaDeActualizacion)
+                setActualizado(true)
+                enqueueSnackbar("Datos actualizados", {variant: "success"})
+            })
             .catch(err => swal(err.response.data, "", "error"))
     }
     

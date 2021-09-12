@@ -7,7 +7,6 @@ import swal from 'sweetalert';
 export const Parametros = () => {
     const [hospitales, setHospitales] = useState([]);
     const [id, setId] = useState("");
-    const [donacion, setDonacion] = useState("");
     const [serologia, setSerologia] = useState("");
     const [radio, setRadio] = useState("");
     const { enqueueSnackbar } = useSnackbar();
@@ -25,14 +24,12 @@ export const Parametros = () => {
     const setearValores = (event) => {
         setId(event.target.value)
         var hospital = hospitales.filter(hospital => hospital._id === event.target.value)
-        setDonacion(hospital[0].diasSinDonar)
         setSerologia(hospital[0].diasSerologia)
         setRadio(hospital[0].radioNotificacion)
     }
 
     const handleClick = () => {
         var data = {
-            diasSinDonar: donacion,
             diasSerologia: serologia,
             radio: radio
         }
@@ -60,19 +57,6 @@ export const Parametros = () => {
                                 )) : null}
                             </Select>
                     </FormControl>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField
-                        required
-                        id="donacion"
-                        name="donacion"
-                        label="Días requeridos para volver a donar"
-                        inputProps={{ min: 1, max: 10 }}
-                        type="number"
-                        fullWidth
-                        value={donacion}
-                        onChange={(event) => setDonacion(event.target.value)}
-                    />
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <TextField
