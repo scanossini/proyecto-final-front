@@ -22,6 +22,7 @@ export const SolicitudForm = () => {
     const history = useHistory();
     const [hospital, setHospital] = useState("");
     const [cantidad, setCantidad] = useState("");
+    const [DNIPersona, setDNIPersona] = useState("");
     const [tipo, setTipo] = useState("");
     const [hospitales, setHospitales] = useState("");
     const [persona, setPersona] = useState("");
@@ -47,6 +48,7 @@ export const SolicitudForm = () => {
             hospital: hospital,
             tipoDeSangre: tipo,
             persona: persona,
+            DNIPersona: DNIPersona,
             tiempoIncompleta: 10
         }
 
@@ -101,26 +103,40 @@ export const SolicitudForm = () => {
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <FormControl fullWidth>
-                        <InputLabel>Tipo de sangre</InputLabel>
-                        <Select
-                            id="tipo"
-                            name="tipo"
-                            value={tipo}
-                            onChange={(event) => setTipo(event.target.value)}
-                        >
-                            <MenuItem value={"0+"}>0+</MenuItem>
-                            <MenuItem value={"0-"}>0-</MenuItem>
-                            <MenuItem value={"A+"}>A+</MenuItem>
-                            <MenuItem value={"A-"}>A-</MenuItem>
-                            <MenuItem value={"B+"}>B+</MenuItem>
-                            <MenuItem value={"B-"}>B-</MenuItem>
-                            <MenuItem value={"AB+"}>AB+</MenuItem>
-                            <MenuItem value={"AB-"}>AB-</MenuItem>
-                        </Select>
-                    </FormControl>
-                </Grid>
+                    <TextField
+                        required
+                        id="dniPaciente"
+                        name="dniPaciente"
+                        label="DNI de la persona que recibe la donación"
+                        inputProps={{ min: 1 }}
+                        type="number"
+                        fullWidth
+                        onChange={(event) => setDNIPersona(event.target.value)}
+                    />
+                </Grid>                
             </Grid>
+            <Grid container spacing={3}>
+                <Grid item xs={12} sm={6}>
+                        <FormControl fullWidth>
+                            <InputLabel>Tipo de sangre</InputLabel>
+                            <Select
+                                id="tipo"
+                                name="tipo"
+                                value={tipo}
+                                onChange={(event) => setTipo(event.target.value)}
+                            >
+                                <MenuItem value={"0+"}>0+</MenuItem>
+                                <MenuItem value={"0-"}>0-</MenuItem>
+                                <MenuItem value={"A+"}>A+</MenuItem>
+                                <MenuItem value={"A-"}>A-</MenuItem>
+                                <MenuItem value={"B+"}>B+</MenuItem>
+                                <MenuItem value={"B-"}>B-</MenuItem>
+                                <MenuItem value={"AB+"}>AB+</MenuItem>
+                                <MenuItem value={"AB-"}>AB-</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </Grid>
+                </Grid>
             <div className={classes.buttons}>
                 <Button
                     color="secondary"
