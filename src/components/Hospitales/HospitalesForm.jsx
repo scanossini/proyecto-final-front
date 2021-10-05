@@ -27,6 +27,7 @@ export const HospitalesForm = () => {
     const [direccion, setDireccion] = useState("");
     const [ciudad, setCiudad] = useState("");
     const [latLng, setLatLng] = useState("");
+    const GOOGLE_KEY = "";
 
     useEffect(() => {
         axios.get("http://localhost:5000/admin/info", {"headers": {"token": sessionStorage.getItem("token")}})
@@ -59,7 +60,7 @@ export const HospitalesForm = () => {
         axios.get("https://maps.googleapis.com/maps/api/geocode/json", {
             params: {
                 address: direccion + ", " + ciudad,
-                key: "AIzaSyDI4eXkh46mcHYH1Qfuxp4x18sBgQG7pfc"
+                key: GOOGLE_KEY
             }
         }).then(res => {
             var location = res.data.results[0].geometry.location
@@ -119,7 +120,7 @@ export const HospitalesForm = () => {
                         </Grid>
                         <Grid item xs={12} sm={12}>
                             <Map 
-                                googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDI4eXkh46mcHYH1Qfuxp4x18sBgQG7pfc"
+                                googleMapURL={"https://maps.googleapis.com/maps/api/js?v=3.exp&key=" + GOOGLE_KEY}
                                 containerElement={<div style={{height: "400px"}}/>}
                                 mapElement={<div style={{height: "100%"}}/>}
                                 loadingElement={<p>Cargando...</p>}
